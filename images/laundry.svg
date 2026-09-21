@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420" role="img" aria-label="Laundry Requests">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071422"/>
+      <stop offset="1" stop-color="#1a3d66"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="420" fill="url(#sky)"/>
+  <circle cx="140" cy="78" r="70" fill="#24527a" opacity="0.5"/>
+  <rect x="180" y="58" width="440" height="304" rx="22" fill="#f7fafc"/>
+  <rect x="180" y="58" width="440" height="72" rx="22" fill="#2b6cb0"/>
+  <rect x="180" y="100" width="440" height="30" fill="#2b6cb0"/>
+  <text x="210" y="104" fill="#ffffff" font-family="sans-serif" font-size="28" font-weight="700">Laundry Requests</text>
+  <rect x="214" y="168" width="372" height="46" rx="10" fill="#ebf8ff" stroke="#bee3f8"/>
+  <rect x="214" y="230" width="372" height="46" rx="10" fill="#feebc8" stroke="#f6ad55"/>
+  <rect x="214" y="292" width="372" height="46" rx="10" fill="#c6f6d5" stroke="#68d391"/>
+  <text x="236" y="198" fill="#2c5282" font-family="sans-serif" font-size="18">Room request</text>
+  <text x="236" y="260" fill="#7b341e" font-family="sans-serif" font-size="18">On the way</text>
+  <text x="236" y="322" fill="#276749" font-family="sans-serif" font-size="18">Done</text>
+</svg>

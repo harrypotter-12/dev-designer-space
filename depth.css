@@ -1,0 +1,191 @@
+/* Light 3D depth for the space portfolio. Loaded last so it can
+   restore card transforms that later rules in style.css flatten. */
+
+#body-header {
+  perspective: 1100px;
+}
+
+.header-content {
+  transform-style: preserve-3d;
+  transform: rotateX(var(--hx, 5deg)) rotateY(var(--hy, 0deg));
+  transition: transform 0.45s ease;
+}
+
+.hero-depth {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 260px;
+  height: 260px;
+  margin-left: -130px;
+  margin-top: -130px;
+  transform: translateZ(-90px) rotateX(64deg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.header-content h1,
+.header-content .typing-subtitle {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-ring {
+  position: absolute;
+  inset: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 255, 255, 0.55);
+  box-shadow:
+    0 0 22px rgba(0, 255, 255, 0.35),
+    inset 0 0 28px rgba(159, 75, 255, 0.28);
+}
+
+.hero-planet {
+  position: absolute;
+  width: 86px;
+  height: 86px;
+  left: 50%;
+  top: 50%;
+  margin: -43px 0 0 -43px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 32% 30%, #e9fdff 0%, #49d4ff 26%, #123a62 64%, #070b16 80%);
+  box-shadow:
+    0 16px 28px rgba(0, 0, 0, 0.5),
+    0 0 26px rgba(0, 255, 255, 0.35);
+}
+
+#projects-container.space-grid,
+#projects-container {
+  perspective: 1400px;
+  max-width: 1120px;
+  overflow: visible;
+}
+
+.tilt-card.project-card {
+  transform-style: preserve-3d !important;
+  transform: rotateX(4deg) rotateY(-6deg) !important;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease !important;
+  border-color: rgba(0, 255, 255, 0.28) !important;
+  background: linear-gradient(165deg, rgba(10, 18, 36, 0.94), rgba(4, 8, 18, 0.96)) !important;
+  box-shadow:
+    0 22px 36px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 0 22px rgba(0, 255, 255, 0.08) !important;
+}
+
+.tilt-card.project-card:nth-child(even) {
+  transform: rotateX(4deg) rotateY(6deg) !important;
+}
+
+#projects-container .project-title {
+  background: none !important;
+  -webkit-text-fill-color: #f4fbff !important;
+  color: #f4fbff !important;
+  text-shadow: 0 0 12px rgba(0, 255, 255, 0.28);
+  letter-spacing: 0.04em;
+}
+
+#projects-container .project-description {
+  color: #e7eef8 !important;
+  font-size: 0.98rem !important;
+  line-height: 1.65 !important;
+}
+
+#projects-container .mission-status {
+  color: #9af6ff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.45rem;
+}
+
+#projects-container .project-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .hero-ring {
+    animation: hero-spin 28s linear infinite;
+  }
+
+  .tilt-card.project-card {
+    animation: depth-float 8s ease-in-out infinite;
+  }
+
+  .tilt-card.project-card:nth-child(even) {
+    animation-name: depth-float-alt;
+    animation-delay: -3s;
+  }
+
+  .tilt-card.project-card.is-tilting,
+  .tilt-card.project-card.is-tilting:nth-child(even) {
+    animation: none;
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(-8px) !important;
+    border-color: rgba(0, 255, 255, 0.7) !important;
+    box-shadow:
+      0 28px 48px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 0 32px rgba(0, 255, 255, 0.22) !important;
+  }
+}
+
+@keyframes hero-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes depth-float {
+  0%, 100% { transform: rotateX(4deg) rotateY(-7deg) translateY(0); }
+  50% { transform: rotateX(7deg) rotateY(-3deg) translateY(-10px); }
+}
+
+@keyframes depth-float-alt {
+  0%, 100% { transform: rotateX(5deg) rotateY(7deg) translateY(0); }
+  50% { transform: rotateX(2deg) rotateY(3deg) translateY(-8px); }
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    transform: none;
+  }
+
+  .hero-depth {
+    width: 168px;
+    height: 168px;
+    margin-left: -84px;
+    margin-top: -84px;
+    opacity: 0.75;
+  }
+
+  .tilt-card.project-card,
+  .tilt-card.project-card:nth-child(even),
+  .tilt-card.project-card.is-tilting {
+    animation: none !important;
+    transform: none !important;
+    box-shadow:
+      0 14px 28px rgba(0, 0, 0, 0.48),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+  }
+
+  #projects-container .project-description {
+    font-size: 1rem !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-ring,
+  .tilt-card.project-card,
+  .tilt-card.project-card:nth-child(even) {
+    animation: none !important;
+  }
+
+  .header-content,
+  .tilt-card.project-card,
+  .tilt-card.project-card:nth-child(even) {
+    transform: none !important;
+    transition: none !important;
+  }
+}

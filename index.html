@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="navigation.css">
     <link rel="stylesheet" type="text/css" href="timeline-override.css">
     <link rel="stylesheet" type="text/css" href="rocket-design.css">
+    <link rel="stylesheet" type="text/css" href="depth.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap">
@@ -243,6 +244,10 @@
     <header id="body-header">
         <div id="particles-js-header"></div>
         <div class="header-content">
+            <div class="hero-depth" aria-hidden="true">
+                <div class="hero-ring"></div>
+                <div class="hero-planet"></div>
+            </div>
             <h1 class="glitch-text" data-text="JASHAN">JASHAN</h1>
             <p class="typing-subtitle">Web Developer & Web Designer</p>
         </div>
@@ -312,7 +317,7 @@
 
             <div id="projects-container" class="space-grid">
                 <!-- Online Book Library -->
-                <div class="project-card space-capsule">
+                <div class="project-card space-capsule tilt-card">
                     <div class="project-image capsule-window">
                         <img src="images/Books.png" alt="Online Book Library">
                         <div class="window-reflection"></div>
@@ -338,7 +343,7 @@
                 </div>
 
                 <!-- Makeup Store -->
-                <div class="project-card space-capsule">
+                <div class="project-card space-capsule tilt-card">
                     <div class="project-image capsule-window">
                         <img src="images/makeup.png" alt="Makeup Store">
                         <div class="window-reflection"></div>
@@ -364,7 +369,7 @@
                 </div>
 
                 <!-- Capitals Game -->
-                <div class="project-card space-capsule">
+                <div class="project-card space-capsule tilt-card">
                     <div class="project-image capsule-window">
                         <img src="images/capitals.png" alt="Capitals Game">
                         <div class="window-reflection"></div>
@@ -389,7 +394,7 @@
                 </div>
 
                 <!-- Quote Generator -->
-                <div class="project-card space-capsule">
+                <div class="project-card space-capsule tilt-card">
                     <div class="project-image capsule-window">
                         <img src="images/Inspirational_Quote_generator.png" alt="Quote Generator">
                         <div class="window-reflection"></div>
@@ -413,8 +418,57 @@
                     </div>
                 </div>
 
-                <!-- Animated Background -->
-                <!-- Removed the Animated Background project card as requested -->
+                <!-- ShiftBoard -->
+                <div class="project-card space-capsule tilt-card">
+                    <div class="project-image capsule-window">
+                        <img src="images/shiftboard.svg" alt="ShiftBoard schedule board">
+                        <div class="window-reflection"></div>
+                    </div>
+                    <div class="project-content mission-details">
+                        <div class="mission-status">MISSION: ACTIVE</div>
+                        <h4 class="project-title">ShiftBoard</h4>
+                        <p class="project-description">
+                            Housekeeping staff schedules — big, clear, and easy to use.
+                            Staff sign in with name and password and see their week. Admins add people and build the schedule.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag power-cell">HTML</span>
+                            <span class="tech-tag power-cell">CSS</span>
+                            <span class="tech-tag power-cell">JAVASCRIPT</span>
+                            <span class="tech-tag power-cell">NODE.JS</span>
+                        </div>
+                        <div class="project-links control-panel">
+                            <a href="https://github.com/Jashanpreet1234/shiftboard" class="project-link launch-btn">View Code</a>
+                            <a href="https://shiftboard-59eu.onrender.com" class="project-link deploy-btn">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Laundry Requests -->
+                <div class="project-card space-capsule tilt-card">
+                    <div class="project-image capsule-window">
+                        <img src="images/laundry.svg" alt="Laundry Requests housekeeping tracker">
+                        <div class="window-reflection"></div>
+                    </div>
+                    <div class="project-content mission-details">
+                        <div class="mission-status">MISSION: ACTIVE</div>
+                        <h4 class="project-title">Laundry</h4>
+                        <p class="project-description">
+                            Housekeeping supply tracker. Staff send linen requests for a room or area, with quantities and an urgent flag.
+                            Laundry marks them pending, on the way, or done, and the manager view keeps team tasks and today's counts.
+                            Requests stay on this device unless Firebase is configured.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag power-cell">HTML</span>
+                            <span class="tech-tag power-cell">CSS</span>
+                            <span class="tech-tag power-cell">JAVASCRIPT</span>
+                        </div>
+                        <div class="project-links control-panel">
+                            <a href="https://github.com/Jashanpreet1234/Laundry" class="project-link launch-btn">View Code</a>
+                            <a href="https://jashanpreet1234.github.io/Laundry/" class="project-link deploy-btn">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1361,6 +1415,7 @@
     </button>
     
     <script src="contact-form.js"></script>
+    <script src="card-tilt.js"></script>
     
     <!-- Load Particle Systems -->
     <script src="particles-background.js"></script>
