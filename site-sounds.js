@@ -28,57 +28,68 @@
     var osc = audio.createOscillator();
     var gain = audio.createGain();
     osc.type = "sine";
-    osc.frequency.setValueAtTime(520, now);
+    osc.frequency.setValueAtTime(310, now);
+    osc.frequency.exponentialRampToValueAtTime(170, now + 0.028);
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.02, now + 0.008);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.006, now + 0.004);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
     osc.connect(gain);
     gain.connect(audio.destination);
     osc.start(now);
-    osc.stop(now + 0.05);
+    osc.stop(now + 0.04);
+  }
+
+  function rumbleVoice(audio, now, frequency, duration) {
+    var osc = audio.createOscillator();
+    var filter = audio.createBiquadFilter();
+    var gain = audio.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(frequency, now);
+    osc.frequency.exponentialRampToValueAtTime(frequency * 0.72, now + duration);
+    filter.type = "lowpass";
+    filter.frequency.value = 140;
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.045, now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(audio.destination);
+    osc.start(now);
+    osc.stop(now + duration + 0.02);
   }
 
   function thrust() {
     var audio = context();
     if (!audio) return;
     var now = audio.currentTime;
-    var duration = 0.22;
-    var rumble = audio.createOscillator();
-    var rumbleFilter = audio.createBiquadFilter();
-    var rumbleGain = audio.createGain();
-    rumble.type = "triangle";
-    rumble.frequency.setValueAtTime(78, now);
-    rumble.frequency.exponentialRampToValueAtTime(46, now + duration);
-    rumbleFilter.type = "lowpass";
-    rumbleFilter.frequency.value = 160;
-    rumbleGain.gain.setValueAtTime(0.0001, now);
-    rumbleGain.gain.exponentialRampToValueAtTime(0.07, now + 0.03);
-    rumbleGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-    rumble.connect(rumbleFilter);
-    rumbleFilter.connect(rumbleGain);
-    rumbleGain.connect(audio.destination);
-    rumble.start(now);
-    rumble.stop(now + duration + 0.02);
+    var duration = 0.18;
+    rumbleVoice(audio, now, 48, duration);
+    rumbleVoice(audio, now, 71, duration);
 
-    var hissDuration = 0.12;
-    var count = Math.floor(audio.sampleRate * hissDuration);
+    var noiseDuration = 0.14;
+    var count = Math.floor(audio.sampleRate * noiseDuration);
     var buffer = audio.createBuffer(1, count, audio.sampleRate);
     var data = buffer.getChannelData(0);
-    for (var i = 0; i < count; i++) data[i] = Math.random() * 2 - 1;
+    var last = 0;
+    for (var i = 0; i < count; i++) {
+      last = last * 0.82 + (Math.random() * 2 - 1) * 0.18;
+      data[i] = last;
+    }
     var noise = audio.createBufferSource();
-    var hissFilter = audio.createBiquadFilter();
-    var hissGain = audio.createGain();
+    var band = audio.createBiquadFilter();
+    var noiseGain = audio.createGain();
     noise.buffer = buffer;
-    hissFilter.type = "highpass";
-    hissFilter.frequency.value = 1800;
-    hissGain.gain.setValueAtTime(0.0001, now);
-    hissGain.gain.exponentialRampToValueAtTime(0.03, now + 0.015);
-    hissGain.gain.exponentialRampToValueAtTime(0.0001, now + hissDuration);
-    noise.connect(hissFilter);
-    hissFilter.connect(hissGain);
-    hissGain.connect(audio.destination);
+    band.type = "bandpass";
+    band.frequency.value = 520;
+    band.Q.value = 0.7;
+    noiseGain.gain.setValueAtTime(0.0001, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.028, now + 0.015);
+    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + noiseDuration);
+    noise.connect(band);
+    band.connect(noiseGain);
+    noiseGain.connect(audio.destination);
     noise.start(now);
-    noise.stop(now + hissDuration + 0.02);
+    noise.stop(now + noiseDuration + 0.02);
   }
 
   function playClick() {
@@ -128,7 +139,7 @@
   document.addEventListener("rocket-thrust", function () {
     if (!enabled) return;
     var nowMs = Date.now();
-    if (nowMs - lastWhoosh < 180) return;
+    if (nowMs - lastWhoosh < 160) return;
     lastWhoosh = nowMs;
     var audio = context();
     if (!audio) return;
