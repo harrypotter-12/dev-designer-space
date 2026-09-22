@@ -3,23 +3,31 @@
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   if (reduce || !fine) return;
 
-  var max = 8;
-
-  document.querySelectorAll(".tilt-card").forEach(function (card) {
-    card.addEventListener("pointermove", function (event) {
-      var rect = card.getBoundingClientRect();
+  function bind(el, max, rxName, ryName) {
+    el.addEventListener("pointermove", function (event) {
+      var rect = el.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
       var px = (event.clientX - rect.left) / rect.width;
       var py = (event.clientY - rect.top) / rect.height;
-      card.style.setProperty("--ry", ((px - 0.5) * max * 2).toFixed(2) + "deg");
-      card.style.setProperty("--rx", ((0.5 - py) * max * 2).toFixed(2) + "deg");
-      card.classList.add("is-tilting");
+      el.style.setProperty(ryName, ((px - 0.5) * max * 2).toFixed(2) + "deg");
+      el.style.setProperty(rxName, ((0.5 - py) * max * 2).toFixed(2) + "deg");
+      el.classList.add("is-tilting");
     });
 
-    card.addEventListener("pointerleave", function () {
-      card.classList.remove("is-tilting");
-      card.style.removeProperty("--rx");
-      card.style.removeProperty("--ry");
+    el.addEventListener("pointerleave", function () {
+      el.classList.remove("is-tilting");
+      el.style.removeProperty(rxName);
+      el.style.removeProperty(ryName);
     });
+  }
+
+  document.querySelectorAll(".tilt-card").forEach(function (card) {
+    bind(card, 8, "--rx", "--ry");
+  });
+
+  document.querySelectorAll(".timeline-card, .stat-item, .transmission-console, .establish-contact").forEach(function (panel) {
+    panel.classList.add("depth-panel");
+    bind(panel, 5, "--px", "--py");
   });
 
   var header = document.getElementById("body-header");
