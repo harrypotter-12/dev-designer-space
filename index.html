@@ -87,6 +87,15 @@
         }
     </style>
     
+    <script>
+        (function () {
+            var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var stored = null;
+            try { stored = localStorage.getItem("portfolio-sound"); } catch (error) { stored = null; }
+            var on = stored === "on" || (stored !== "off" && !reduce);
+            document.documentElement.setAttribute("data-sound", on ? "on" : "off");
+        })();
+    </script>
 </head>
 <body>
     <!-- Loading Screen -->

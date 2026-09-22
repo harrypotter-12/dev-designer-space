@@ -67,6 +67,7 @@
     button.setAttribute("aria-pressed", enabled ? "true" : "false");
     button.setAttribute("aria-label", enabled ? "Mute sound" : "Turn sound on");
     button.classList.toggle("is-muted", !enabled);
+    document.documentElement.setAttribute("data-sound", enabled ? "on" : "off");
     if (icon) icon.textContent = enabled ? "🔊" : "🔇";
     if (label) label.textContent = enabled ? "Sound on" : "Muted";
   }
