@@ -23,7 +23,7 @@
     <meta property="og:title" content="Jashanpreet Kaur - Web Developer & Designer">
     <meta property="og:description" content="Experienced Full Stack Developer specializing in modern web technologies">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:url" content="https://harrypotter-12.github.io/dev-designer-space/">
     
     <!-- Loading Screen Styles -->
     <style>
@@ -87,66 +87,6 @@
         }
     </style>
     
-    <!-- Audio for page entrance sound -->
-    <audio id="entrance-sound" preload="auto">
-        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
-        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
-    </audio>
-    
-    <!-- Woman's voice for summary -->
-    <audio id="summary-voice" preload="auto">
-        <source src="https://www.soundjay.com/voice/sounds/female-voice-1.wav" type="audio/wav">
-        <source src="https://www.soundjay.com/voice/sounds/female-voice-1.mp3" type="audio/mpeg">
-    </audio>
-    
-    <!-- Hover sound for cards -->
-    <audio id="hover-sound" preload="auto">
-        <source src="https://www.soundjay.com/button/sounds/button-09.wav" type="audio/wav">
-        <source src="https://www.soundjay.com/button/sounds/button-09.mp3" type="audio/mpeg">
-    </audio>
-    
-    <!-- Click sound for buttons -->
-    <audio id="click-sound" preload="auto">
-        <source src="https://www.soundjay.com/button/sounds/button-10.wav" type="audio/wav">
-        <source src="https://www.soundjay.com/button/sounds/button-10.mp3" type="audio/mpeg">
-    </audio>
-    
-    <!-- Success sound for achievements -->
-    <audio id="success-sound" preload="auto">
-        <source src="https://www.soundjay.com/misc/sounds/success-1.wav" type="audio/wav">
-        <source src="https://www.soundjay.com/misc/sounds/success-1.mp3" type="audio/mpeg">
-    </audio>
-    
-    <!-- 🌟 NEW ENHANCED SOUNDS -->
-    <!-- Particle ambient sound -->
-    <audio id="particle-ambient" preload="auto" loop>
-        <source src="https://www.soundjay.com/misc/sounds/space-ambient-1.wav" type="audio/wav">
-        <source src="https://www.soundjay.com/misc/sounds/space-ambient-1.mp3" type="audio/mpeg">
-    </audio>
-    
-    <!-- Portfolio hover sound -->
-    <audio id="portfolio-hover" preload="auto">
-        <source src="https://www.soundjay.com/button/sounds/button-11.wav" type="audio/wav">
-        <source src="https://www.soundjay.com/button/sounds/button-11.mp3" type="audio/mpeg">
-    </audio>
-    
-    <!-- Navigation sound -->
-    <audio id="nav-sound" preload="auto">
-        <source src="https://www.soundjay.com/button/sounds/button-12.wav" type="audio/wav">
-        <source src="https://www.soundjay.com/button/sounds/button-12.mp3" type="audio/mpeg">
-    </audio>
-    
-    <!-- Scroll sound -->
-    <audio id="scroll-sound" preload="auto">
-        <source src="https://www.soundjay.com/misc/sounds/scroll-1.wav" type="audio/wav">
-        <source src="https://www.soundjay.com/misc/sounds/scroll-1.mp3" type="audio/mpeg">
-    </audio>
-    
-    <!-- Tech tag hover sound -->
-    <audio id="tech-hover" preload="auto">
-        <source src="https://www.soundjay.com/button/sounds/button-13.wav" type="audio/wav">
-        <source src="https://www.soundjay.com/button/sounds/button-13.mp3" type="audio/mpeg">
-    </audio>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -201,7 +141,7 @@
         <nav class="space-navbar">
             <!-- Cosmic Brand Logo -->
             <div class="nav-brand-container">
-                <a href="#home" class="space-brand">
+                <a href="#body-header" class="space-brand">
                     <div class="brand-orb"></div>
                     <span class="brand-text">JASHAN</span>
                     <div class="brand-status">ONLINE</div>
@@ -209,7 +149,7 @@
             </div>
             
             <!-- Space Navigation Links -->
-            <ul class="space-nav-links">
+            <ul class="space-nav-links" id="space-nav">
                 <li class="nav-item">
                     <a href="#about" class="nav-link">
                         <span class="link-text">ABOUT</span>
@@ -233,13 +173,17 @@
             </ul>
             
             <!-- Space Menu Toggle -->
-            <div class="space-menu-toggle">
+            <button type="button" id="sound-toggle" class="sound-toggle" aria-pressed="true" aria-label="Mute sound">
+                <span class="sound-icon" aria-hidden="true">🔊</span>
+                <span class="sound-label">Sound on</span>
+            </button>
+            <button type="button" class="space-menu-toggle" aria-expanded="false" aria-controls="space-nav" aria-label="Open menu">
                 <div class="toggle-container">
                     <span class="toggle-line"></span>
                     <span class="toggle-line"></span>
                     <span class="toggle-line"></span>
                 </div>
-            </div>
+            </button>
         </nav>
     <header id="body-header">
         <div id="particles-js-header"></div>
@@ -283,7 +227,7 @@
                     <div class="stat-item">
                         <div class="stat-icon"><i class="fas fa-project-diagram"></i></div>
                         <div class="stat-content">
-                            <div class="stat-number" data-target="5">0</div>
+                            <div class="stat-number" data-target="6">0</div>
                             <div class="stat-label">Projects Built</div>
                         </div>
                     </div>
@@ -336,8 +280,8 @@
                             <span class="tech-tag power-cell">EXPRESS</span>
                         </div>
                         <div class="project-links control-panel">
-                            <a href="https://github.com/Jashanpreet1234/Books.io" class="project-link launch-btn">View Code</a>
-                            <a href="https://jashanpreet1234.github.io/Books.io/" class="project-link deploy-btn">Live Demo</a>
+                            <a href="https://github.com/Jashanpreet1234/Books.io" class="project-link launch-btn" target="_blank" rel="noopener">View Code</a>
+                            <a href="https://jashanpreet1234.github.io/Books.io/" class="project-link deploy-btn" target="_blank" rel="noopener">Live Demo</a>
                         </div>
                     </div>
                 </div>
@@ -362,8 +306,8 @@
                             <span class="tech-tag power-cell">API</span>
                         </div>
                         <div class="project-links control-panel">
-                            <a href="https://github.com/Jashanpreet1234/MakeUp.io" class="project-link launch-btn">View Code</a>
-                            <a href="https://jashanpreet1234.github.io/MakeUp.io/" class="project-link deploy-btn">Live Demo</a>
+                            <a href="https://github.com/Jashanpreet1234/MakeUp.io" class="project-link launch-btn" target="_blank" rel="noopener">View Code</a>
+                            <a href="https://jashanpreet1234.github.io/MakeUp.io/" class="project-link deploy-btn" target="_blank" rel="noopener">Live Demo</a>
                         </div>
                     </div>
                 </div>
@@ -387,8 +331,8 @@
                             <span class="tech-tag power-cell">JAVASCRIPT</span>
                         </div>
                         <div class="project-links control-panel">
-                            <a href="https://github.com/Jashanpreet1234/country-capitals-quiz" class="project-link launch-btn">View Code</a>
-                            <a href="https://jashanpreet1234.github.io/country-capitals-quiz/" class="project-link deploy-btn">Live Demo</a>
+                            <a href="https://github.com/Jashanpreet1234/country-capitals-quiz" class="project-link launch-btn" target="_blank" rel="noopener">View Code</a>
+                            <a href="https://jashanpreet1234.github.io/country-capitals-quiz/" class="project-link deploy-btn" target="_blank" rel="noopener">Live Demo</a>
                         </div>
                     </div>
                 </div>
@@ -412,8 +356,8 @@
                             <span class="tech-tag power-cell">JAVASCRIPT</span>
                         </div>
                         <div class="project-links control-panel">
-                            <a href="https://github.com/Jashanpreet1234/quoteGenerator.github.io" class="project-link launch-btn">View Code</a>
-                            <a href="https://jashanpreet1234.github.io/quoteGenerator.github.io/" class="project-link deploy-btn">Live Demo</a>
+                            <a href="https://github.com/Jashanpreet1234/quoteGenerator.github.io" class="project-link launch-btn" target="_blank" rel="noopener">View Code</a>
+                            <a href="https://jashanpreet1234.github.io/quoteGenerator.github.io/" class="project-link deploy-btn" target="_blank" rel="noopener">Live Demo</a>
                         </div>
                     </div>
                 </div>
@@ -438,8 +382,8 @@
                             <span class="tech-tag power-cell">NODE.JS</span>
                         </div>
                         <div class="project-links control-panel">
-                            <a href="https://github.com/Jashanpreet1234/shiftboard" class="project-link launch-btn">View Code</a>
-                            <a href="https://shiftboard-59eu.onrender.com" class="project-link deploy-btn">Live Demo</a>
+                            <a href="https://github.com/Jashanpreet1234/shiftboard" class="project-link launch-btn" target="_blank" rel="noopener">View Code</a>
+                            <a href="https://shiftboard-59eu.onrender.com" class="project-link deploy-btn" target="_blank" rel="noopener">Live Demo</a>
                         </div>
                     </div>
                 </div>
@@ -464,8 +408,8 @@
                             <span class="tech-tag power-cell">JAVASCRIPT</span>
                         </div>
                         <div class="project-links control-panel">
-                            <a href="https://github.com/Jashanpreet1234/Laundry" class="project-link launch-btn">View Code</a>
-                            <a href="https://jashanpreet1234.github.io/Laundry/" class="project-link deploy-btn">Live Demo</a>
+                            <a href="https://github.com/Jashanpreet1234/Laundry" class="project-link launch-btn" target="_blank" rel="noopener">View Code</a>
+                            <a href="https://jashanpreet1234.github.io/Laundry/" class="project-link deploy-btn" target="_blank" rel="noopener">Live Demo</a>
                         </div>
                     </div>
                 </div>
@@ -692,15 +636,6 @@
                             ACCESS CODE REPOSITORY
                         </a>
                         
-                        <a href="https://www.linkedin.com/feed/" class="contact-link" target="_blank" rel="noopener">
-                            <i class="fab fa-linkedin"></i>
-                            CONNECT ON LINKEDIN
-                        </a>
-                        
-                        <a href="tel:+1234567890" class="contact-link">
-                            <i class="fas fa-phone"></i>
-                            DIRECT COMMUNICATION LINE
-                        </a>
                     </div>
                 </div>
                 </div> 
@@ -732,10 +667,19 @@
             
             // 🚀 SPACE NAVIGATION TOGGLE
             spaceMenuToggle.addEventListener('click', function () {
-                spaceNavLinks.classList.toggle('active');
-                spaceMenuToggle.classList.toggle('active');
-                
-                // Clean menu toggle without flashy effects
+                const open = spaceNavLinks.classList.toggle('active');
+                spaceMenuToggle.classList.toggle('active', open);
+                spaceMenuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+                spaceMenuToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+            });
+
+            spaceNavLinks.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    spaceNavLinks.classList.remove('active');
+                    spaceMenuToggle.classList.remove('active');
+                    spaceMenuToggle.setAttribute('aria-expanded', 'false');
+                    spaceMenuToggle.setAttribute('aria-label', 'Open menu');
+                });
             });
 
             // 🚀 SPACE NAVBAR SCROLL EFFECT
@@ -795,283 +739,6 @@
                 // Start the animation
                 updateRocket();
             }
-            });
-        </script>
-
-        <!-- JavaScript for enhanced sound system -->
-        <script>
-            // Sound management system
-            const SoundManager = {
-                sounds: {},
-                isMuted: false,
-                
-                init() {
-                    this.sounds = {
-                        entrance: document.getElementById('entrance-sound'),
-                        summary: document.getElementById('summary-voice'),
-                        hover: document.getElementById('hover-sound'),
-                        click: document.getElementById('click-sound'),
-                        success: document.getElementById('success-sound'),
-                        particleAmbient: document.getElementById('particle-ambient'),
-                        portfolioHover: document.getElementById('portfolio-hover'),
-                        nav: document.getElementById('nav-sound'),
-                        scroll: document.getElementById('scroll-sound'),
-                        techHover: document.getElementById('tech-hover')
-                    };
-                    
-                    // Set volumes
-                    Object.values(this.sounds).forEach(sound => {
-                        if (sound) {
-                            if (sound.id === 'particle-ambient') {
-                                sound.volume = 0.1; // Very low for ambient
-                            } else {
-                                sound.volume = 0.3;
-                            }
-                        }
-                    });
-                    
-                    this.setupEventListeners();
-                },
-                
-                play(soundName) {
-                    if (this.isMuted || !this.sounds[soundName]) return;
-                    
-                    const sound = this.sounds[soundName];
-                    sound.currentTime = 0; // Reset to start
-                    sound.play().catch(error => {
-                        console.log(`Failed to play ${soundName}:`, error);
-                    });
-                },
-                
-                setupEventListeners() {
-                    // Entrance sound on page load
-                    document.addEventListener('DOMContentLoaded', () => {
-                        setTimeout(() => this.play('entrance'), 500);
-                    });
-                    
-                    // Woman's voice for summary when about section is visible
-                    const aboutSection = document.getElementById('about');
-                    if (aboutSection) {
-                        const observer = new IntersectionObserver((entries) => {
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    setTimeout(() => this.play('summary'), 1000);
-                                    observer.unobserve(entry.target);
-                                }
-                            });
-                        }, { threshold: 0.5 });
-                        observer.observe(aboutSection);
-                    }
-                    
-                    // Hover sounds for interactive elements
-                    const interactiveElements = document.querySelectorAll('.tech-card, .course-card, .nav-link, .card-link');
-                    interactiveElements.forEach(element => {
-                        element.addEventListener('mouseenter', () => this.play('hover'));
-                        element.addEventListener('click', () => this.play('click'));
-                    });
-                    
-                    // Portfolio card hover sounds
-                    const portfolioCards = document.querySelectorAll('.project-card, .space-capsule');
-                    // Disabled hover sound on project cards for smoother hover performance
-                    portfolioCards.forEach(card => {
-                        card.addEventListener('click', () => this.play('click'));
-                    });
-                    
-                    // Navigation hover sounds
-                    const navElements = document.querySelectorAll('.nav-link, .space-brand');
-                    navElements.forEach(element => {
-                        element.addEventListener('mouseenter', () => this.play('nav'));
-                        element.addEventListener('click', () => this.play('click'));
-                    });
-                    
-                    // Tech tag hover sounds
-                    const techTags = document.querySelectorAll('.tech-tag, .power-cell');
-                    techTags.forEach(tag => {
-                        tag.addEventListener('mouseenter', () => this.play('techHover'));
-                    });
-                    
-                    // Scroll sound (throttled)
-                    let scrollTimeout;
-                    window.addEventListener('scroll', () => {
-                        if (scrollTimeout) clearTimeout(scrollTimeout);
-                        scrollTimeout = setTimeout(() => this.play('scroll'), 100);
-                    });
-                    
-                    // Start ambient particle sound after page load
-                    setTimeout(() => {
-                        this.play('particleAmbient');
-                    }, 3000);
-                    
-                    // Success sound for achievements (when scrolling to projects)
-                    const projectsSection = document.getElementById('tech-cards-section');
-                    if (projectsSection) {
-                        const observer = new IntersectionObserver((entries) => {
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    setTimeout(() => this.play('success'), 500);
-                                    observer.unobserve(entry.target);
-                                }
-                            });
-                        }, { threshold: 0.3 });
-                        observer.observe(projectsSection);
-                    }
-                    
-                    // Toggle mute with 'M' key
-                    document.addEventListener('keydown', (e) => {
-                        if (e.key.toLowerCase() === 'm') {
-                            this.isMuted = !this.isMuted;
-                            console.log(`Sound ${this.isMuted ? 'muted' : 'unmuted'}`);
-                        }
-                    });
-                }
-            };
-            
-            // Initialize sound system
-            SoundManager.init();
-            
-            // Add visual feedback for sound controls
-            const soundIndicator = document.createElement('div');
-            soundIndicator.innerHTML = `
-                <div class="sound-control-btn" style="
-                    position: fixed; 
-                    top: 20px; 
-                    right: 20px; 
-                    z-index: 1000; 
-                    width: 60px; 
-                    height: 60px; 
-                    background: radial-gradient(circle, rgba(0, 255, 255, 0.2), rgba(255, 20, 147, 0.1));
-                    border-radius: 50%; 
-                    display: flex; 
-                    align-items: center; 
-                    justify-content: center; 
-                    cursor: pointer; 
-                    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(255, 20, 147, 0.1);
-                    transition: all 0.4s ease;
-                    border: 2px solid rgba(0, 255, 255, 0.3);
-                    font-size: 24px;
-                    color: #00ffff;
-                    backdrop-filter: blur(15px);
-                    -webkit-backdrop-filter: blur(15px);
-                    position: relative;
-                    overflow: hidden;
-                " onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 30px rgba(255, 20, 147, 0.2)'" 
-                   onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(255, 20, 147, 0.1)'"
-                   onclick="toggleSound()">
-                    <div style="
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        bottom: 0;
-                        background: conic-gradient(from 0deg, transparent, rgba(0, 255, 255, 0.1), transparent, rgba(255, 20, 147, 0.1), transparent);
-                        animation: rotate 3s linear infinite;
-                        border-radius: 50%;
-                    "></div>
-                    <div style="
-                        position: relative;
-                        z-index: 2;
-                        text-shadow: 0 0 10px #00ffff;
-                    ">🔊</div>
-                </div>
-            `;
-            document.body.appendChild(soundIndicator);
-            
-            // Sound toggle function
-            function toggleSound() {
-                SoundManager.isMuted = !SoundManager.isMuted;
-                const indicator = soundIndicator.querySelector('.sound-control-btn');
-                const iconDiv = indicator.querySelector('div:last-child');
-                iconDiv.innerHTML = SoundManager.isMuted ? '🔇' : '🔊';
-                
-                // Add cosmic pulse animation
-                indicator.style.animation = 'cosmicPulse 0.8s ease';
-                setTimeout(() => {
-                    indicator.style.animation = '';
-                }, 800);
-                
-                // Show space-themed notification
-                showSoundNotification(SoundManager.isMuted ? '🌌 Sound Muted' : '⭐ Sound Enabled');
-            }
-            
-            // Notification function
-            function showSoundNotification(message) {
-                const notification = document.createElement('div');
-                notification.innerHTML = `
-                    <div style="
-                        position: fixed; 
-                        top: 90px; 
-                        right: 20px; 
-                        background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(20, 30, 50, 0.9)); 
-                        color: #00ffff; 
-                        padding: 15px 25px; 
-                        border-radius: 30px; 
-                        font-size: 14px; 
-                        font-weight: 600;
-                        z-index: 1001;
-                        transform: translateX(100%);
-                        transition: transform 0.4s ease;
-                        border: 2px solid rgba(0, 255, 255, 0.3);
-                        backdrop-filter: blur(15px);
-                        -webkit-backdrop-filter: blur(15px);
-                        box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-                        text-shadow: 0 0 5px #00ffff;
-                    ">
-                        ${message}
-                    </div>
-                `;
-                document.body.appendChild(notification);
-                
-                // Animate in
-                setTimeout(() => {
-                    notification.querySelector('div').style.transform = 'translateX(0)';
-                }, 100);
-                
-                // Remove after 3 seconds
-                setTimeout(() => {
-                    notification.querySelector('div').style.transform = 'translateX(100%)';
-                    setTimeout(() => notification.remove(), 400);
-                }, 3000);
-            }
-            
-            // Add CSS animations
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes rotate {
-                    from { transform: rotate(0deg); }
-                    to { transform: rotate(360deg); }
-                }
-                
-                @keyframes cosmicPulse {
-                    0% { 
-                        transform: scale(1) rotate(0deg);
-                        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(255, 20, 147, 0.1);
-                    }
-                    50% { 
-                        transform: scale(1.3) rotate(180deg);
-                        box-shadow: 0 0 40px rgba(0, 255, 255, 0.6), inset 0 0 40px rgba(255, 20, 147, 0.3);
-                    }
-                    100% { 
-                        transform: scale(1) rotate(360deg);
-                        box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(255, 20, 147, 0.1);
-                    }
-                }
-                
-                .sound-control-btn:hover {
-                    transform: scale(1.15) rotate(5deg) !important;
-                    box-shadow: 0 0 30px rgba(0, 255, 255, 0.5), inset 0 0 30px rgba(255, 20, 147, 0.2) !important;
-                }
-                
-                .sound-control-btn:active {
-                    transform: scale(0.95) rotate(-5deg) !important;
-                }
-            `;
-            document.head.appendChild(style);
-            
-            // Update indicator when sound is toggled
-            document.addEventListener('keydown', (e) => {
-                if (e.key.toLowerCase() === 'm') {
-                    toggleSound();
-                }
             });
         </script>
 
@@ -1416,6 +1083,7 @@
     
     <script src="contact-form.js"></script>
     <script src="card-tilt.js"></script>
+    <script src="site-sounds.js"></script>
     
     <!-- Load Particle Systems -->
     <script src="particles-background.js"></script>

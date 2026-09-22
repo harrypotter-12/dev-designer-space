@@ -9,7 +9,7 @@
 
 **🌟 A futuristic, space-themed portfolio showcasing web development skills with stunning animations and interactive elements 🌟**
 
-[🌐 **Live Demo**](https://jashanpreet1234.github.io/dev-designer-space/) • [📧 **Contact**](mailto:jashanpreetkaur2904@gmail.com) • [💼 **LinkedIn**](https://www.linkedin.com/in/yourprofile)
+[🌐 **Live Demo**](https://harrypotter-12.github.io/dev-designer-space/) • [📧 **Contact**](mailto:jashanpreetkaur2904@gmail.com) • [💼 **GitHub**](https://github.com/harrypotter-12/dev-designer-space)
 
 </div>
 
@@ -39,6 +39,8 @@ Welcome to Commander Jashan's digital space station! This portfolio is a fully i
 | **💄 Beauty RPG** | HTML, CSS, JavaScript | 🟢 Active | [GitHub](https://github.com/Jashanpreet1234/MakeUp.io) \| [Deploy](https://jashanpreet1234.github.io/MakeUp.io/) |
 | **🌍 Capitals Quest** | HTML, CSS, JavaScript | 🟢 Active | [GitHub](https://github.com/Jashanpreet1234/country-capitals-quiz) \| [Deploy](https://jashanpreet1234.github.io/country-capitals-quiz/) |
 | **💭 Quote Generator** | HTML, CSS, JavaScript | 🟢 Active | [GitHub](https://github.com/Jashanpreet1234/quoteGenerator.github.io) \| [Deploy](https://jashanpreet1234.github.io/quoteGenerator.github.io/) |
+| **🗓️ ShiftBoard** | HTML, CSS, JavaScript, Node.js | 🟢 Active | [GitHub](https://github.com/Jashanpreet1234/shiftboard) \| [Live](https://shiftboard-59eu.onrender.com) |
+| **🧺 Laundry** | HTML, CSS, JavaScript | 🟢 Active | [GitHub](https://github.com/Jashanpreet1234/Laundry) \| [Live](https://jashanpreet1234.github.io/Laundry/) |
 | **☕ Coffee Game** | HTML, CSS, JavaScript | 🟢 Active | [GitHub](https://github.com/Jashanpreet1234/Coffee_Game.io) \| [Deploy](https://jashanpreet1234.github.io/Coffee_Game.io/) |
 | **☀️ 3D Sun** | HTML, CSS, JavaScript | 🟢 Active | [GitHub](https://github.com/Jashanpreet1234/3d_Sun.io) \| [Deploy](https://jashanpreet1234.github.io/3d_Sun.io/) |
 | **📝 Task Manager** | Python, Tkinter | 🟢 Active | [GitHub](https://github.com/Jashanpreet1234/Task-Manager) |
@@ -82,8 +84,8 @@ Welcome to Commander Jashan's digital space station! This portfolio is a fully i
 
    ```bash
 # 🛸 Clone the space station
-git clone https://github.com/Jashanpreet1234/portfolio.io-main.git
-cd portfolio.io-main
+git clone https://github.com/harrypotter-12/dev-designer-space.git
+cd dev-designer-space
 
 # 🔋 Power up the systems
    npm install
@@ -106,7 +108,7 @@ deploy.bat
 ## 📁 **Space Station Architecture**
 
 ```
-portfolio.io-main/
+dev-designer-space/
 ├── 🎨 Frontend Assets
 │   ├── index.html              # Main space station interface
 │   ├── project.html            # Project showcase module
@@ -233,14 +235,6 @@ vercel --prod
 }
 ```
 
-### **🎵 Audio Settings**
-```javascript
-// Adjust sound volumes in the sound system
-Object.values(this.sounds).forEach(sound => {
-    if (sound) sound.volume = 0.3; // 30% volume
-});
-```
-
 ---
 
 ## 🌐 **API Endpoints**
@@ -302,7 +296,7 @@ Found a glitch in the matrix? Please report it with:
 
 ## 📜 **Mission License**
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is shared so it can be explored and modified.
 
 ```
 MIT License - Feel free to explore, modify, and use this code for your own space missions! 🚀
@@ -313,7 +307,6 @@ MIT License - Feel free to explore, modify, and use this code for your own space
 ## 🌟 **Acknowledgments**
 
 - 🎨 **Design Inspiration**: Sci-fi interfaces and space aesthetics
-- 🎵 **Audio Assets**: Creative Commons sound effects
 - 🌌 **Particle Effects**: Custom JavaScript animations
 - 💖 **Special Thanks**: To all the developers who make open source possible
 
@@ -326,7 +319,6 @@ MIT License - Feel free to explore, modify, and use this code for your own space
 **Commander Jashan** 👩‍🚀
 
 [![Email](https://img.shields.io/badge/Email-jashanpreetkaur2904%40gmail.com-red?style=for-the-badge&logo=gmail&logoColor=white)](mailto:jashanpreetkaur2904@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yourprofile)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Jashanpreet1234)
 
 **"The fact that programming is enjoyable makes me keen to learn new programming languages. Additionally, if I love something, I can easily add beauty to it."** ⭐
@@ -339,7 +331,7 @@ MIT License - Feel free to explore, modify, and use this code for your own space
 
 ### 🚀 **Ready for Launch?**
 
-**[🌟 View Live Portfolio 🌟](https://jashanpreet1234.github.io/dev-designer-space/)**
+**[🌟 View Live Portfolio 🌟](https://harrypotter-12.github.io/dev-designer-space/)**
 
 *Made with 💚 and lots of ☕ by Commander Jashan*
 

@@ -39,20 +39,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify(data)
             });
 
-            const result = await response.json();
-
-            if (response.ok) {
-                showMessage('Thank you! Your message has been sent successfully.', 'success');
-                contactForm.reset();
-                
-                // Play success sound if available
-                playSound('success-sound');
-            } else {
-                showMessage(result.error || 'Something went wrong. Please try again.', 'error');
+            if (!response.ok) {
+                throw new Error('Contact API unavailable');
             }
+
+            showMessage('Thank you! Your message has been sent successfully.', 'success');
+            contactForm.reset();
         } catch (error) {
-            console.error('Contact form error:', error);
-            showMessage('Network error. Please check your connection and try again.', 'error');
+            const subject = encodeURIComponent('Portfolio message from ' + data.name);
+            const body = encodeURIComponent(data.name + ' <' + data.email + '>\n\n' + data.message);
+            window.location.href = 'mailto:jashanpreetkaur2904@gmail.com?subject=' + subject + '&body=' + body;
+            showMessage('Your email app is opening with this message.', 'success');
+            contactForm.reset();
         } finally {
             setSubmitButtonState(false);
         }
