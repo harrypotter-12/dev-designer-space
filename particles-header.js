@@ -160,12 +160,7 @@ function createHeaderRocket() {
   };
 }
 
-// Create header rockets occasionally
-setInterval(() => {
-  if (Math.random() < 0.3) {
-    createHeaderRocket();
-  }
-}, 12000);
+// Do not draw a rocket or planet in the header.
 
 // ✨ SIMPLE WHITE HEADER SPARKLES ✨
 function createHeaderSparkle() {
