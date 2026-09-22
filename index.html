@@ -89,10 +89,9 @@
     
     <script>
         (function () {
-            var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
             var stored = null;
             try { stored = localStorage.getItem("portfolio-sound"); } catch (error) { stored = null; }
-            var on = stored === "on" || (stored !== "off" && !reduce);
+            var on = stored === "on";
             document.documentElement.setAttribute("data-sound", on ? "on" : "off");
         })();
     </script>
@@ -171,9 +170,9 @@
             </ul>
             
             <!-- Space Menu Toggle -->
-            <button type="button" id="sound-toggle" class="sound-toggle" aria-pressed="true" aria-label="Mute sound">
-                <span class="sound-icon" aria-hidden="true">🔊</span>
-                <span class="sound-label">Sound on</span>
+            <button type="button" id="sound-toggle" class="sound-toggle is-muted" aria-pressed="false" aria-label="Turn sound on">
+                <span class="sound-icon" aria-hidden="true">🔇</span>
+                <span class="sound-label">Muted</span>
             </button>
             <button type="button" class="space-menu-toggle" aria-expanded="false" aria-controls="space-nav" aria-label="Open menu">
                 <div class="toggle-container">
@@ -185,6 +184,14 @@
         </nav>
     <header id="body-header">
         <div id="particles-js-header"></div>
+        <div id="rocket" aria-hidden="true">
+          <div class="rocket-body">
+            <div class="window"></div>
+            <div class="fin fin-left"></div>
+            <div class="fin fin-right"></div>
+            <div class="flame"></div>
+          </div>
+        </div>
         <div class="header-content">
             <h1 class="glitch-text" data-text="JASHAN">JASHAN</h1>
             <p class="typing-subtitle">Web Developer & Web Designer</p>
@@ -657,49 +664,70 @@
             
             // Clean space navigation without flashy effects
 
-            // ROCKET MOUSE-FOLLOW SCRIPT
+            // Rocket follows the pointer in the background. It starts off to the side.
             const rocket = document.getElementById('rocket');
             if (rocket) {
-                let mouseX = window.innerWidth / 2;
-                let mouseY = window.innerHeight / 2;
-                let rocketX = window.innerWidth / 2;
-                let rocketY = window.innerHeight / 2;
+                const rocketW = 28;
+                const rocketH = 52;
+                let mouseX = window.innerWidth - 72;
+                let mouseY = Math.round(window.innerHeight * 0.58);
+                let rocketX = mouseX;
+                let rocketY = mouseY;
                 let angle = 0;
-                
-                // Smooth following parameters - MUCH FASTER and more responsive
-                const smoothness = 0.15; // FASTER following - increased from 0.05
-                const rotationSpeed = 0.25; // FASTER rotation - increased from 0.08
-                
-                // Track mouse movement
-                document.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
+                let seenMouse = false;
+                const smoothness = 0.12;
+                const rotationSpeed = 0.22;
+
+                function keepClear(x, y) {
+                    const nav = document.querySelector('.space-navbar');
+                    const name = document.querySelector('.header-content h1');
+                    const about = document.querySelector('#about h2');
+                    let nextX = x;
+                    let nextY = y;
+                    if (nav) {
+                        const box = nav.getBoundingClientRect();
+                        if (nextY < box.bottom + 6) nextY = box.bottom + 8;
+                    }
+                    [name, about].forEach(function (el) {
+                        if (!el) return;
+                        const box = el.getBoundingClientRect();
+                        const hit = nextX + rocketW > box.left - 12 && nextX < box.right + 12 && nextY + rocketH > box.top - 12 && nextY < box.bottom + 12;
+                        if (hit) nextY = box.bottom + 16;
+                    });
+                    return { x: nextX, y: nextY };
+                }
+
+                document.addEventListener('mousemove', function (event) {
+                    seenMouse = true;
+                    mouseX = event.clientX - rocketW / 2;
+                    mouseY = event.clientY - rocketH / 2;
                 });
 
                 function updateRocket() {
-                    // Smooth position interpolation (no throttling)
-                    rocketX += (mouseX - rocketX) * smoothness;
-                    rocketY += (mouseY - rocketY) * smoothness;
-                    
-                    // Calculate direction for rotation
-                    const deltaX = mouseX - rocketX;
-                    const deltaY = mouseY - rocketY;
+                    const spot = keepClear(seenMouse ? mouseX : rocketX, seenMouse ? mouseY : rocketY);
+                    const prevX = rocketX;
+                    const prevY = rocketY;
+                    rocketX += (spot.x - rocketX) * smoothness;
+                    rocketY += (spot.y - rocketY) * smoothness;
+                    const moved = Math.hypot(rocketX - prevX, rocketY - prevY);
+                    const deltaX = spot.x - rocketX;
+                    const deltaY = spot.y - rocketY;
                     const targetAngle = Math.atan2(deltaX, -deltaY) * (180 / Math.PI);
-                    
-                    // Smooth rotation - handle 360 degree wrap
                     let angleDiff = targetAngle - angle;
                     if (angleDiff > 180) angleDiff -= 360;
                     if (angleDiff < -180) angleDiff += 360;
                     angle += angleDiff * rotationSpeed;
-                    
-                    // Apply the transformation using transform3d for hardware acceleration
-                    rocket.style.transform = `translate3d(${rocketX - window.innerWidth/2}px, ${rocketY - window.innerHeight/2}px, 0) rotate(${angle}deg)`;
-                    
-                    // Continue animation
+                    rocket.style.transform = 'translate3d(' + rocketX + 'px,' + rocketY + 'px,0) rotate(' + angle + 'deg)';
+                    if (seenMouse && moved > 0.8) {
+                        document.dispatchEvent(new CustomEvent('rocket-thrust'));
+                    }
                     requestAnimationFrame(updateRocket);
                 }
-                
-                // Start the animation
+
+                const parked = keepClear(rocketX, rocketY);
+                rocketX = parked.x;
+                rocketY = parked.y;
+                rocket.style.transform = 'translate3d(' + rocketX + 'px,' + rocketY + 'px,0)';
                 updateRocket();
             }
             });

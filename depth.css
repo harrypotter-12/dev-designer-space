@@ -664,3 +664,47 @@ button.space-menu-toggle {
 .space-menu-toggle {
   display: none !important;
 }
+
+#body-header {
+  perspective: none;
+}
+
+#rocket {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 52px;
+  margin: 0;
+  z-index: 4;
+  pointer-events: none;
+  filter: none;
+}
+
+#rocket .rocket-body {
+  width: 16px;
+  height: 36px;
+}
+
+.sound-toggle {
+  width: 32px !important;
+  height: 32px !important;
+  min-height: 32px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  font-size: 0.9rem !important;
+  box-shadow: none !important;
+}
+
+.sound-label,
+html[data-sound="off"] .sound-label::after {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
