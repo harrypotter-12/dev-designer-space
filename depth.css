@@ -25,9 +25,62 @@
 }
 
 .header-content h1,
-.header-content .typing-subtitle {
+.header-content .typing-subtitle,
+.hero-work {
   position: relative;
   z-index: 2;
+}
+
+.hero-work {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-work-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 52px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 2px solid rgba(0, 255, 255, 0.55);
+  background: rgba(4, 12, 28, 0.88);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+}
+
+.hero-work-name {
+  color: #f4fbff;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-right: 4px;
+}
+
+.hero-work a {
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+  color: #041018;
+  background: #67f6ff;
+}
+
+.hero-work a:last-child {
+  color: #d8fbff;
+  background: transparent;
+  border: 2px solid rgba(0, 255, 255, 0.75);
+}
+
+.hero-work a:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
 }
 
 .hero-ring {
