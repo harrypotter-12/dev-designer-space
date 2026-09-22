@@ -692,13 +692,13 @@ html[data-sound="off"] .sound-label::after {
   border: 0 !important;
 }
 
-/* Same rocket as rocket-design.css, a little larger, with a clearer flame. */
+/* Same rocket as rocket-design.css, small enough to stay on the screen. */
 #rocket {
   position: fixed;
   left: 50vw;
   top: 50vh;
-  width: 84px;
-  height: 168px;
+  width: 48px;
+  height: 100px;
   z-index: 20;
   pointer-events: none;
   filter: none;
@@ -706,10 +706,12 @@ html[data-sound="off"] .sound-label::after {
 }
 
 #rocket .rocket-body {
-  position: relative;
-  width: 70px;
-  height: 140px;
-  margin: 14px auto 0;
+  position: absolute;
+  left: 11px;
+  top: 0;
+  width: 26px;
+  height: 52px;
+  margin: 0;
   background: linear-gradient(150deg, #555, #222);
   border-radius: 50% 50% 10% 10%;
   border: 1px solid #777;
@@ -718,10 +720,10 @@ html[data-sound="off"] .sound-label::after {
 #rocket .rocket-body::before {
   content: "";
   position: absolute;
-  top: 14px;
-  left: 11px;
-  width: 21px;
-  height: 84px;
+  top: 6px;
+  left: 4px;
+  width: 8px;
+  height: 32px;
   background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
   border-radius: 50%;
   transform: skewX(-15deg);
@@ -729,64 +731,175 @@ html[data-sound="off"] .sound-label::after {
 }
 
 #rocket .window {
-  top: 35px;
+  top: 12px;
   left: 50%;
-  width: 38px;
-  height: 38px;
+  width: 14px;
+  height: 14px;
   background: #0ff;
   border-radius: 50%;
   border: 2px solid #fff;
-  box-shadow: 0 0 18px #0ff, inset 0 0 6px rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 10px #0ff, inset 0 0 4px rgba(255, 255, 255, 0.8);
   transform: translateX(-50%);
 }
 
 #rocket .fin {
-  bottom: 14px;
-  width: 28px;
-  height: 56px;
+  bottom: 4px;
+  width: 10px;
+  height: 18px;
   background: linear-gradient(135deg, #444, #111);
   border: 1px solid #666;
   clip-path: none;
 }
 
 #rocket .fin-left {
-  left: -14px;
+  left: -10px;
   border-radius: 80% 20% 20% 80%;
   transform: none;
 }
 
 #rocket .fin-right {
-  right: -14px;
+  right: -10px;
   border-radius: 20% 80% 80% 20%;
   transform: none;
 }
 
 #rocket .flame {
   left: 50%;
-  bottom: -84px;
-  width: 42px;
-  height: 98px;
+  bottom: -40px;
+  width: 14px;
+  height: 36px;
   background: transparent;
   transform: translateX(-50%);
   animation: flame-wave 0.5s infinite linear;
 }
 
 #rocket .flame::before {
-  left: 7px;
-  width: 28px;
+  left: 2px;
+  width: 10px;
   height: 100%;
   border-radius: 50% 50% 20% 20%;
   background: linear-gradient(to top, #ffe08a, #ffaf33 35%, #ff4500);
-  box-shadow: 0 0 22px #ffaf33;
+  box-shadow: 0 0 10px #ffaf33;
 }
 
 #rocket .flame::after {
-  left: 14px;
-  width: 14px;
+  left: 4px;
+  width: 6px;
   height: 80%;
   border-radius: 50% 50% 20% 20%;
   background: linear-gradient(to top, #64ffda, #0ff);
-  box-shadow: 0 0 16px #64ffda;
+  box-shadow: 0 0 8px #64ffda;
+}
+
+@media (max-width: 800px) {
+  #rocket {
+    width: 40px;
+    height: 84px;
+  }
+
+  #rocket .rocket-body {
+    left: 9px;
+    width: 22px;
+    height: 44px;
+  }
+
+  #rocket .rocket-body::before {
+    top: 5px;
+    left: 3px;
+    width: 7px;
+    height: 26px;
+  }
+
+  #rocket .window {
+    top: 10px;
+    width: 11px;
+    height: 11px;
+  }
+
+  #rocket .fin {
+    width: 8px;
+    height: 14px;
+  }
+
+  #rocket .fin-left {
+    left: -8px;
+  }
+
+  #rocket .fin-right {
+    right: -8px;
+  }
+
+  #rocket .flame {
+    bottom: -32px;
+    width: 12px;
+    height: 28px;
+  }
+
+  #rocket .flame::before {
+    left: 2px;
+    width: 8px;
+  }
+
+  #rocket .flame::after {
+    left: 4px;
+    width: 4px;
+  }
+}
+
+@media (max-width: 520px) {
+  #rocket {
+    width: 32px;
+    height: 68px;
+  }
+
+  #rocket .rocket-body {
+    left: 8px;
+    width: 16px;
+    height: 34px;
+  }
+
+  #rocket .rocket-body::before {
+    top: 4px;
+    left: 2px;
+    width: 5px;
+    height: 20px;
+  }
+
+  #rocket .window {
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    border-width: 1px;
+  }
+
+  #rocket .fin {
+    width: 7px;
+    height: 12px;
+  }
+
+  #rocket .fin-left {
+    left: -7px;
+  }
+
+  #rocket .fin-right {
+    right: -7px;
+  }
+
+  #rocket .flame {
+    bottom: -24px;
+    width: 10px;
+    height: 22px;
+  }
+
+  #rocket .flame::before {
+    left: 1px;
+    width: 8px;
+  }
+
+  #rocket .flame::after {
+    left: 3px;
+    width: 4px;
+  }
 }
 
 #about,
