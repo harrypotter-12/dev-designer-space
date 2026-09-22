@@ -184,20 +184,6 @@
         </nav>
     <header id="body-header">
         <div id="particles-js-header"></div>
-        <div id="rocket" aria-hidden="true">
-          <div class="rocket-stage">
-            <div class="rocket-nose"></div>
-            <div class="rocket-nose-side"></div>
-            <div class="rocket-hull"></div>
-            <div class="rocket-hull-side"></div>
-            <div class="rocket-band"></div>
-            <div class="rocket-port"></div>
-            <div class="rocket-fin rocket-fin-left"></div>
-            <div class="rocket-fin rocket-fin-right"></div>
-            <div class="rocket-fin rocket-fin-rear"></div>
-            <div class="rocket-flame"></div>
-          </div>
-        </div>
         <div class="header-content">
             <h1 class="glitch-text" data-text="JASHAN">JASHAN</h1>
             <p class="typing-subtitle">Web Developer & Web Designer</p>
@@ -208,6 +194,18 @@
             </a>
         </div>
     </header>
+        <div id="rocket">
+          <div class="rocket-body">
+            <div class="button button1"></div>
+            <div class="button button2"></div>
+            <div class="button button3"></div>
+            <div class="window"></div>
+            <div class="button button4"></div>
+            <div class="fin fin-left"></div>
+            <div class="fin fin-right"></div>
+            <div class="flame"></div>
+          </div>
+        </div>
     <main>
 
         <section id="about">
@@ -670,54 +668,31 @@
             
             // Clean space navigation without flashy effects
 
-            // Rocket follows the pointer in the background. It starts off to the side.
+            // ROCKET MOUSE-FOLLOW SCRIPT
             const rocket = document.getElementById('rocket');
             if (rocket) {
-                const rocketW = 86;
-                const rocketH = 168;
-                let mouseX = window.innerWidth - 180;
-                let mouseY = Math.round(window.innerHeight * 0.58);
-                let rocketX = mouseX;
-                let rocketY = mouseY;
+                let mouseX = window.innerWidth / 2;
+                let mouseY = window.innerHeight / 2;
+                let rocketX = window.innerWidth / 2;
+                let rocketY = window.innerHeight / 2;
                 let angle = 0;
-                let seenMouse = false;
-                const smoothness = 0.12;
-                const rotationSpeed = 0.22;
 
-                function keepClear(x, y) {
-                    const nav = document.querySelector('.space-navbar');
-                    const name = document.querySelector('.header-content h1');
-                    const about = document.querySelector('#about h2');
-                    let nextX = x;
-                    let nextY = y;
-                    if (nav) {
-                        const box = nav.getBoundingClientRect();
-                        if (nextY < box.bottom + 6) nextY = box.bottom + 8;
-                    }
-                    [name, about].forEach(function (el) {
-                        if (!el) return;
-                        const box = el.getBoundingClientRect();
-                        const hit = nextX + rocketW > box.left - 12 && nextX < box.right + 12 && nextY + rocketH > box.top - 12 && nextY < box.bottom + 12;
-                        if (hit) nextY = box.bottom + 16;
-                    });
-                    return { x: nextX, y: nextY };
-                }
+                const smoothness = 0.15;
+                const rotationSpeed = 0.25;
 
-                document.addEventListener('mousemove', function (event) {
-                    seenMouse = true;
-                    mouseX = event.clientX - rocketW / 2;
-                    mouseY = event.clientY - rocketH / 2;
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
                 });
 
                 function updateRocket() {
-                    const spot = keepClear(seenMouse ? mouseX : rocketX, seenMouse ? mouseY : rocketY);
                     const prevX = rocketX;
                     const prevY = rocketY;
-                    rocketX += (spot.x - rocketX) * smoothness;
-                    rocketY += (spot.y - rocketY) * smoothness;
-                    const moved = Math.hypot(rocketX - prevX, rocketY - prevY);
-                    const deltaX = spot.x - rocketX;
-                    const deltaY = spot.y - rocketY;
+                    rocketX += (mouseX - rocketX) * smoothness;
+                    rocketY += (mouseY - rocketY) * smoothness;
+
+                    const deltaX = mouseX - rocketX;
+                    const deltaY = mouseY - rocketY;
                     if (Math.hypot(deltaX, deltaY) > 1) {
                         const targetAngle = Math.atan2(deltaX, -deltaY) * (180 / Math.PI);
                         let angleDiff = targetAngle - angle;
@@ -725,17 +700,15 @@
                         if (angleDiff < -180) angleDiff += 360;
                         angle += angleDiff * rotationSpeed;
                     }
-                    rocket.style.transform = 'translate3d(' + rocketX + 'px,' + rocketY + 'px,0) rotate(' + angle + 'deg)';
-                    if (seenMouse && moved > 0.8) {
+
+                    rocket.style.transform = `translate3d(${rocketX - window.innerWidth/2}px, ${rocketY - window.innerHeight/2}px, 0) rotate(${angle}deg)`;
+                    if (Math.hypot(rocketX - prevX, rocketY - prevY) > 0.8) {
                         document.dispatchEvent(new CustomEvent('rocket-thrust'));
                     }
+
                     requestAnimationFrame(updateRocket);
                 }
 
-                const parked = keepClear(rocketX, rocketY);
-                rocketX = parked.x;
-                rocketY = parked.y;
-                rocket.style.transform = 'translate3d(' + rocketX + 'px,' + rocketY + 'px,0)';
                 updateRocket();
             }
             });
