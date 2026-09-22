@@ -38,31 +38,47 @@
     osc.stop(now + 0.05);
   }
 
-  function whoosh() {
+  function thrust() {
     var audio = context();
     if (!audio) return;
     var now = audio.currentTime;
-    var duration = 0.14;
-    var count = Math.floor(audio.sampleRate * duration);
+    var duration = 0.22;
+    var rumble = audio.createOscillator();
+    var rumbleFilter = audio.createBiquadFilter();
+    var rumbleGain = audio.createGain();
+    rumble.type = "triangle";
+    rumble.frequency.setValueAtTime(78, now);
+    rumble.frequency.exponentialRampToValueAtTime(46, now + duration);
+    rumbleFilter.type = "lowpass";
+    rumbleFilter.frequency.value = 160;
+    rumbleGain.gain.setValueAtTime(0.0001, now);
+    rumbleGain.gain.exponentialRampToValueAtTime(0.07, now + 0.03);
+    rumbleGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    rumble.connect(rumbleFilter);
+    rumbleFilter.connect(rumbleGain);
+    rumbleGain.connect(audio.destination);
+    rumble.start(now);
+    rumble.stop(now + duration + 0.02);
+
+    var hissDuration = 0.12;
+    var count = Math.floor(audio.sampleRate * hissDuration);
     var buffer = audio.createBuffer(1, count, audio.sampleRate);
     var data = buffer.getChannelData(0);
     for (var i = 0; i < count; i++) data[i] = Math.random() * 2 - 1;
     var noise = audio.createBufferSource();
-    var filter = audio.createBiquadFilter();
-    var gain = audio.createGain();
+    var hissFilter = audio.createBiquadFilter();
+    var hissGain = audio.createGain();
     noise.buffer = buffer;
-    filter.type = "bandpass";
-    filter.frequency.setValueAtTime(480, now);
-    filter.frequency.exponentialRampToValueAtTime(160, now + duration);
-    filter.Q.value = 0.6;
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.04, now + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-    noise.connect(filter);
-    filter.connect(gain);
-    gain.connect(audio.destination);
+    hissFilter.type = "highpass";
+    hissFilter.frequency.value = 1800;
+    hissGain.gain.setValueAtTime(0.0001, now);
+    hissGain.gain.exponentialRampToValueAtTime(0.03, now + 0.015);
+    hissGain.gain.exponentialRampToValueAtTime(0.0001, now + hissDuration);
+    noise.connect(hissFilter);
+    hissFilter.connect(hissGain);
+    hissGain.connect(audio.destination);
     noise.start(now);
-    noise.stop(now + duration + 0.02);
+    noise.stop(now + hissDuration + 0.02);
   }
 
   function playClick() {
@@ -117,7 +133,7 @@
     var audio = context();
     if (!audio) return;
     if (audio.state === "suspended") audio.resume();
-    whoosh();
+    thrust();
   });
 
   var toggle = document.getElementById("sound-toggle");

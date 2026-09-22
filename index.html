@@ -185,11 +185,17 @@
     <header id="body-header">
         <div id="particles-js-header"></div>
         <div id="rocket" aria-hidden="true">
-          <div class="rocket-body">
-            <div class="window"></div>
-            <div class="fin fin-left"></div>
-            <div class="fin fin-right"></div>
-            <div class="flame"></div>
+          <div class="rocket-stage">
+            <div class="rocket-nose"></div>
+            <div class="rocket-nose-side"></div>
+            <div class="rocket-hull"></div>
+            <div class="rocket-hull-side"></div>
+            <div class="rocket-band"></div>
+            <div class="rocket-port"></div>
+            <div class="rocket-fin rocket-fin-left"></div>
+            <div class="rocket-fin rocket-fin-right"></div>
+            <div class="rocket-fin rocket-fin-rear"></div>
+            <div class="rocket-flame"></div>
           </div>
         </div>
         <div class="header-content">
@@ -667,9 +673,9 @@
             // Rocket follows the pointer in the background. It starts off to the side.
             const rocket = document.getElementById('rocket');
             if (rocket) {
-                const rocketW = 28;
-                const rocketH = 52;
-                let mouseX = window.innerWidth - 72;
+                const rocketW = 86;
+                const rocketH = 168;
+                let mouseX = window.innerWidth - 180;
                 let mouseY = Math.round(window.innerHeight * 0.58);
                 let rocketX = mouseX;
                 let rocketY = mouseY;
@@ -712,11 +718,13 @@
                     const moved = Math.hypot(rocketX - prevX, rocketY - prevY);
                     const deltaX = spot.x - rocketX;
                     const deltaY = spot.y - rocketY;
-                    const targetAngle = Math.atan2(deltaX, -deltaY) * (180 / Math.PI);
-                    let angleDiff = targetAngle - angle;
-                    if (angleDiff > 180) angleDiff -= 360;
-                    if (angleDiff < -180) angleDiff += 360;
-                    angle += angleDiff * rotationSpeed;
+                    if (Math.hypot(deltaX, deltaY) > 1) {
+                        const targetAngle = Math.atan2(deltaX, -deltaY) * (180 / Math.PI);
+                        let angleDiff = targetAngle - angle;
+                        if (angleDiff > 180) angleDiff -= 360;
+                        if (angleDiff < -180) angleDiff += 360;
+                        angle += angleDiff * rotationSpeed;
+                    }
                     rocket.style.transform = 'translate3d(' + rocketX + 'px,' + rocketY + 'px,0) rotate(' + angle + 'deg)';
                     if (seenMouse && moved > 0.8) {
                         document.dispatchEvent(new CustomEvent('rocket-thrust'));
