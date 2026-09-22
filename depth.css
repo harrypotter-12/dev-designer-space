@@ -707,26 +707,26 @@ html[data-sound="off"] .sound-label::after {
 
 #rocket .rocket-body {
   position: absolute;
-  left: 28px;
-  top: 40px;
-  width: 28px;
-  height: 124px;
+  left: 26px;
+  top: 48px;
+  width: 32px;
+  height: 118px;
   margin: 0;
-  border-radius: 6px;
-  border: 1px solid #d7e2ec;
-  background: linear-gradient(90deg, #667484 0%, #f7fbff 40%, #d0dae4 68%, #3c4a58 100%);
+  border-radius: 4px 4px 6px 6px;
+  border: 1px solid #e4eef6;
+  background: linear-gradient(90deg, #4e5c6c 0%, #f8fbff 38%, #d5dee8 62%, #2f3c4a 100%);
 }
 
 #rocket .rocket-body::before {
   content: "";
   position: absolute;
-  left: -6px;
-  top: -40px;
-  width: 40px;
-  height: 42px;
+  left: 0;
+  top: -48px;
+  width: 32px;
+  height: 50px;
   border-radius: 0;
-  background: linear-gradient(90deg, #8d261c 0%, #ffd5cc 48%, #d24a38 100%);
-  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  background: linear-gradient(90deg, #8a241b 0%, #ffe0d8 46%, #c73d2e 100%);
+  clip-path: polygon(50% 0, 92% 100%, 8% 100%);
   transform: none;
 }
 
@@ -744,40 +744,40 @@ html[data-sound="off"] .sound-label::after {
 }
 
 #rocket .fin {
-  bottom: 2px;
-  width: 26px;
-  height: 40px;
+  bottom: 0;
+  width: 30px;
+  height: 44px;
   border: 0;
-  background: linear-gradient(#eef3f8, #667584);
-  clip-path: polygon(100% 0, 0 72%, 28% 100%, 100% 100%);
+  background: linear-gradient(#f2f6fa, #5d6c7c);
+  clip-path: polygon(100% 8%, 0 78%, 22% 100%, 100% 70%);
 }
 
 #rocket .fin-left {
-  left: -22px;
+  left: -26px;
   border-radius: 0;
 }
 
 #rocket .fin-right {
-  right: -22px;
+  right: -26px;
   border-radius: 0;
   transform: scaleX(-1);
 }
 
 #rocket .flame {
   left: 50%;
-  bottom: -46px;
-  width: 18px;
-  height: 46px;
+  bottom: -52px;
+  width: 16px;
+  height: 52px;
   background: transparent;
   animation: clear-rocket-flame 0.16s ease-in-out infinite alternate;
 }
 
 #rocket .flame::before {
   left: 0;
-  width: 18px;
+  width: 16px;
   height: 100%;
-  border-radius: 40% 40% 50% 50%;
-  background: radial-gradient(circle at 50% 0, #fff 0, #ffe36a 28%, #ff8a1e 58%, rgba(255, 40, 0, 0) 80%);
+  border-radius: 50% 50% 45% 45%;
+  background: radial-gradient(circle at 50% 8%, #fff 0, #ffe36a 22%, #ff8a1e 52%, rgba(255, 40, 0, 0) 78%);
   box-shadow: none;
 }
 
@@ -847,7 +847,8 @@ html[data-sound="off"] .sound-label::after {
   margin-top: 18px;
 }
 
-#game-score {
+#game-score,
+#game-best {
   margin: 0;
   font-size: 1rem;
   letter-spacing: 0.04em;

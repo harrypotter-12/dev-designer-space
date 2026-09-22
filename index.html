@@ -414,6 +414,7 @@
             <p class="game-lead">Dodge the rocks. Move with the pointer, or click the game and use the arrow keys.</p>
             <div class="game-bar">
                 <p id="game-score">Score 0</p>
+                <p id="game-best">Best 0</p>
                 <button type="button" id="game-restart">Restart</button>
             </div>
             <canvas id="game-canvas" width="800" height="420" tabindex="0" aria-label="Fly the rocket and dodge rocks"></canvas>
@@ -695,8 +696,7 @@
                 let rocketY = mouseY;
                 let angle = 0;
 
-                const smoothness = 0.15;
-                const rotationSpeed = 0.25;
+                let lastTime = performance.now();
 
                 function keepClear(x, y) {
                     const nav = document.querySelector('.space-navbar');
@@ -720,12 +720,16 @@
                     mouseY = e.clientY - 36;
                 });
 
-                function updateRocket() {
+                function updateRocket(now) {
+                    const dt = Math.min(0.032, (now - lastTime) / 1000);
+                    lastTime = now;
+                    const follow = 1 - Math.exp(-5.5 * dt);
+                    const turn = 1 - Math.exp(-4 * dt);
                     const spot = keepClear(mouseX, mouseY);
                     const prevX = rocketX;
                     const prevY = rocketY;
-                    rocketX += (spot.x - rocketX) * smoothness;
-                    rocketY += (spot.y - rocketY) * smoothness;
+                    rocketX += (spot.x - rocketX) * follow;
+                    rocketY += (spot.y - rocketY) * follow;
 
                     const deltaX = spot.x - rocketX;
                     const deltaY = spot.y - rocketY;
@@ -734,7 +738,7 @@
                         let angleDiff = targetAngle - angle;
                         if (angleDiff > 180) angleDiff -= 360;
                         if (angleDiff < -180) angleDiff += 360;
-                        angle += angleDiff * rotationSpeed;
+                        angle += angleDiff * turn;
                     }
 
                     rocket.style.transform = `translate3d(${rocketX - window.innerWidth/2}px, ${rocketY - window.innerHeight/2}px, 0) rotate(${angle}deg)`;
@@ -748,7 +752,7 @@
                 const parked = keepClear(rocketX, rocketY);
                 rocketX = parked.x;
                 rocketY = parked.y;
-                updateRocket();
+                requestAnimationFrame(updateRocket);
             }
             });
         </script>

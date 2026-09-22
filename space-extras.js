@@ -5,10 +5,10 @@
     var ctx = canvas.getContext("2d");
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var planets = [
-      { period: 16, rx: 0.22, ry: 0.09, size: 7, color: "#d9c7a2", phase: 0.4 },
-      { period: 27, rx: 0.34, ry: 0.14, size: 11, color: "#e2b15a", phase: 2.1 },
-      { period: 41, rx: 0.46, ry: 0.19, size: 12, color: "#6eb6f0", phase: 4.2 },
-      { period: 62, rx: 0.58, ry: 0.24, size: 9, color: "#e07a4c", phase: 1.2 }
+      { period: 28, rx: 0.22, ry: 0.09, size: 7, color: "#d9c7a2", phase: 0.4 },
+      { period: 44, rx: 0.34, ry: 0.14, size: 11, color: "#e2b15a", phase: 2.1 },
+      { period: 64, rx: 0.46, ry: 0.19, size: 12, color: "#6eb6f0", phase: 4.2 },
+      { period: 88, rx: 0.58, ry: 0.24, size: 9, color: "#e07a4c", phase: 1.2 }
     ];
     var start = performance.now();
 
@@ -32,8 +32,8 @@
       planets.forEach(function (planet) {
         ctx.beginPath();
         ctx.ellipse(cx, cy, w * planet.rx, h * planet.ry, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(180, 210, 230, 0.28)";
-        ctx.lineWidth = 1;
+        ctx.strokeStyle = "rgba(198, 220, 236, 0.55)";
+        ctx.lineWidth = 1.5;
         ctx.stroke();
       });
 
@@ -69,8 +69,16 @@
   function game() {
     var canvas = document.getElementById("game-canvas");
     var scoreEl = document.getElementById("game-score");
+    var bestEl = document.getElementById("game-best");
     var restart = document.getElementById("game-restart");
     if (!canvas || !scoreEl || !restart) return;
+    var BEST_KEY = "portfolio-rocket-best";
+    var best = 0;
+    try {
+      best = parseInt(localStorage.getItem(BEST_KEY), 10) || 0;
+    } catch (error) {
+      best = 0;
+    }
     var ctx = canvas.getContext("2d");
     var W = canvas.width;
     var H = canvas.height;
@@ -83,8 +91,20 @@
     var keys = {};
     var last = 0;
 
+    function rememberBest() {
+      if (score <= best) return;
+      best = score;
+      try {
+        localStorage.setItem(BEST_KEY, String(best));
+      } catch (error) {
+        /* private mode can block storage; the score still shows this visit */
+      }
+    }
+
     function paintScore() {
+      rememberBest();
       scoreEl.textContent = alive ? "Score " + score : "Score " + score + " — hit";
+      if (bestEl) bestEl.textContent = "Best " + best;
     }
 
     function reset() {
