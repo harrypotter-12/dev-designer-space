@@ -688,8 +688,8 @@
             // ROCKET MOUSE-FOLLOW SCRIPT
             const rocket = document.getElementById('rocket');
             if (rocket) {
-                const rocketW = 84;
-                const rocketH = 220;
+                const rocketW = 112;
+                const rocketH = 260;
                 let mouseX = window.innerWidth - 180;
                 let mouseY = Math.min(window.innerHeight - rocketH - 16, Math.round(window.innerHeight * 0.62));
                 let rocketX = mouseX;
@@ -723,8 +723,8 @@
                 function updateRocket(now) {
                     const dt = Math.min(0.032, (now - lastTime) / 1000);
                     lastTime = now;
-                    const follow = 1 - Math.exp(-5.5 * dt);
-                    const turn = 1 - Math.exp(-4 * dt);
+                    const follow = 1 - Math.exp(-4.2 * dt);
+                    const turn = 1 - Math.exp(-3.2 * dt);
                     const spot = keepClear(mouseX, mouseY);
                     const prevX = rocketX;
                     const prevY = rocketY;

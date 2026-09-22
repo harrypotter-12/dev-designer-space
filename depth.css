@@ -692,13 +692,13 @@ html[data-sound="off"] .sound-label::after {
   border: 0 !important;
 }
 
-/* Clearer silhouette for the original rocket parts. */
+/* Same rocket as rocket-design.css, a little larger, with a clearer flame. */
 #rocket {
   position: fixed;
   left: 50vw;
   top: 50vh;
   width: 84px;
-  height: 220px;
+  height: 168px;
   z-index: 20;
   pointer-events: none;
   filter: none;
@@ -706,92 +706,87 @@ html[data-sound="off"] .sound-label::after {
 }
 
 #rocket .rocket-body {
-  position: absolute;
-  left: 26px;
-  top: 48px;
-  width: 32px;
-  height: 118px;
-  margin: 0;
-  border-radius: 4px 4px 6px 6px;
-  border: 1px solid #e4eef6;
-  background: linear-gradient(90deg, #4e5c6c 0%, #f8fbff 38%, #d5dee8 62%, #2f3c4a 100%);
+  position: relative;
+  width: 70px;
+  height: 140px;
+  margin: 14px auto 0;
+  background: linear-gradient(150deg, #555, #222);
+  border-radius: 50% 50% 10% 10%;
+  border: 1px solid #777;
 }
 
 #rocket .rocket-body::before {
   content: "";
   position: absolute;
-  left: 0;
-  top: -48px;
-  width: 32px;
-  height: 50px;
-  border-radius: 0;
-  background: linear-gradient(90deg, #8a241b 0%, #ffe0d8 46%, #c73d2e 100%);
-  clip-path: polygon(50% 0, 92% 100%, 8% 100%);
-  transform: none;
+  top: 14px;
+  left: 11px;
+  width: 21px;
+  height: 84px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0));
+  border-radius: 50%;
+  transform: skewX(-15deg);
+  clip-path: none;
 }
 
 #rocket .window {
-  top: 22px;
-  width: 14px;
-  height: 14px;
-  border: 2px solid #e7f3fb;
-  background: radial-gradient(circle at 35% 35%, #ffffff 0, #8fdfff 36%, #145e86 74%);
-  box-shadow: none;
-}
-
-#rocket .button {
-  display: none;
+  top: 35px;
+  left: 50%;
+  width: 38px;
+  height: 38px;
+  background: #0ff;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 18px #0ff, inset 0 0 6px rgba(255, 255, 255, 0.8);
+  transform: translateX(-50%);
 }
 
 #rocket .fin {
-  bottom: 0;
-  width: 30px;
-  height: 44px;
-  border: 0;
-  background: linear-gradient(#f2f6fa, #5d6c7c);
-  clip-path: polygon(100% 8%, 0 78%, 22% 100%, 100% 70%);
+  bottom: 14px;
+  width: 28px;
+  height: 56px;
+  background: linear-gradient(135deg, #444, #111);
+  border: 1px solid #666;
+  clip-path: none;
 }
 
 #rocket .fin-left {
-  left: -26px;
-  border-radius: 0;
+  left: -14px;
+  border-radius: 80% 20% 20% 80%;
+  transform: none;
 }
 
 #rocket .fin-right {
-  right: -26px;
-  border-radius: 0;
-  transform: scaleX(-1);
+  right: -14px;
+  border-radius: 20% 80% 80% 20%;
+  transform: none;
 }
 
 #rocket .flame {
   left: 50%;
-  bottom: -52px;
-  width: 16px;
-  height: 52px;
+  bottom: -84px;
+  width: 42px;
+  height: 98px;
   background: transparent;
-  animation: clear-rocket-flame 0.16s ease-in-out infinite alternate;
+  transform: translateX(-50%);
+  animation: flame-wave 0.5s infinite linear;
 }
 
 #rocket .flame::before {
-  left: 0;
-  width: 16px;
+  left: 7px;
+  width: 28px;
   height: 100%;
-  border-radius: 50% 50% 45% 45%;
-  background: radial-gradient(circle at 50% 8%, #fff 0, #ffe36a 22%, #ff8a1e 52%, rgba(255, 40, 0, 0) 78%);
-  box-shadow: none;
+  border-radius: 50% 50% 20% 20%;
+  background: linear-gradient(to top, #ffe08a, #ffaf33 35%, #ff4500);
+  box-shadow: 0 0 22px #ffaf33;
 }
 
 #rocket .flame::after {
-  left: 4px;
-  width: 10px;
-  height: 62%;
-  background: linear-gradient(to top, #fff6c2, #ffb347);
-  box-shadow: none;
-}
-
-@keyframes clear-rocket-flame {
-  from { transform: translateX(-50%) scaleY(0.84); }
-  to { transform: translateX(-50%) scaleY(1.08); }
+  left: 14px;
+  width: 14px;
+  height: 80%;
+  border-radius: 50% 50% 20% 20%;
+  background: linear-gradient(to top, #64ffda, #0ff);
+  box-shadow: 0 0 16px #64ffda;
 }
 
 #about,
