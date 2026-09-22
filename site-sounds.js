@@ -21,22 +21,20 @@
     return ctx;
   }
 
-  function blip(startFreq, endFreq, duration, type, volume) {
+  function tick(volume) {
     var audio = context();
     if (!audio) return;
     var now = audio.currentTime;
     var osc = audio.createOscillator();
     var gain = audio.createGain();
-    osc.type = type;
-    osc.frequency.setValueAtTime(startFreq, now);
-    osc.frequency.exponentialRampToValueAtTime(Math.max(40, endFreq), now + duration);
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(volume, now + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(640, now);
+    gain.gain.setValueAtTime(volume, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.028);
     osc.connect(gain);
     gain.connect(audio.destination);
     osc.start(now);
-    osc.stop(now + duration + 0.02);
+    osc.stop(now + 0.03);
   }
 
   function play(kind) {
@@ -47,10 +45,8 @@
     var audio = context();
     if (!audio) return;
     if (audio.state === "suspended") audio.resume();
-    if (kind === "card") blip(392, 784, 0.12, "triangle", 0.16);
-    else if (kind === "nav") blip(523, 784, 0.08, "sine", 0.12);
-    else if (kind === "click") blip(330, 165, 0.07, "square", 0.08);
-    else blip(880, 1320, 0.05, "sine", 0.07);
+    if (kind === "click") tick(0.03);
+    else tick(0.012);
   }
 
   function paint() {
