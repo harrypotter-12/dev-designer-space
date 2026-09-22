@@ -42,21 +42,15 @@
   function play(kind) {
     if (!enabled) return;
     var nowMs = Date.now();
-    if (nowMs - lastPlayed < 80) return;
+    if (nowMs - lastPlayed < 70) return;
     lastPlayed = nowMs;
     var audio = context();
     if (!audio) return;
-    var start = function () {
-      if (kind === "card") blip(420, 680, 0.07, "triangle", 0.045);
-      else if (kind === "nav") blip(620, 880, 0.06, "sine", 0.04);
-      else if (kind === "click") blip(280, 140, 0.05, "sine", 0.05);
-      else blip(740, 980, 0.045, "sine", 0.03);
-    };
-    if (audio.state === "suspended") {
-      audio.resume().then(start).catch(function () {});
-    } else {
-      start();
-    }
+    if (audio.state === "suspended") audio.resume();
+    if (kind === "card") blip(392, 784, 0.12, "triangle", 0.16);
+    else if (kind === "nav") blip(523, 784, 0.08, "sine", 0.12);
+    else if (kind === "click") blip(330, 165, 0.07, "square", 0.08);
+    else blip(880, 1320, 0.05, "sine", 0.07);
   }
 
   function paint() {
