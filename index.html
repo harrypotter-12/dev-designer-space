@@ -405,14 +405,16 @@
 
         <section id="solar-system" class="space-section solar-section">
             <h2 class="section-heading">Solar System</h2>
-            <p class="solar-lead">A sun with four planets on slow orbits.</p>
+            <p class="solar-lead">Mercury, Venus, Earth, and Mars orbit the sun.</p>
             <canvas id="solar-canvas" width="900" height="440" aria-label="A sun with planets moving on orbits"></canvas>
         </section>
 
         <section id="rocket-game" class="space-section rocket-game-section">
             <h2 class="section-heading">Fly the Rocket</h2>
-            <p class="game-lead">Dodge the rocks. Move with the pointer, or click the game and use the arrow keys.</p>
+            <p class="game-lead">Dodge the rocks. Left steers up and Right steers down. The pointer and arrow keys still work.</p>
             <div class="game-bar">
+                <button type="button" id="game-left">Left</button>
+                <button type="button" id="game-right">Right</button>
                 <p id="game-score">Score 0</p>
                 <p id="game-best">Best 0</p>
                 <button type="button" id="game-restart">Restart</button>

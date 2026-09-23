@@ -951,6 +951,7 @@ html[data-sound="off"] .sound-label::after {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 16px;
   margin-top: 18px;
 }
@@ -962,13 +963,22 @@ html[data-sound="off"] .sound-label::after {
   letter-spacing: 0.04em;
 }
 
-#game-restart {
+#game-restart,
+#game-left,
+#game-right {
   border: 1px solid rgba(154, 246, 255, 0.7);
   background: transparent;
   color: #e7f4ff;
   border-radius: 999px;
   padding: 6px 14px;
   font-size: 0.85rem;
+  touch-action: none;
+}
+
+#game-left,
+#game-right {
+  min-width: 76px;
+  min-height: 44px;
 }
 
 @media (prefers-reduced-motion: reduce) {

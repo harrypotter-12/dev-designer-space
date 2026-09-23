@@ -5,10 +5,10 @@
     var ctx = canvas.getContext("2d");
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var planets = [
-      { period: 28, rx: 0.22, ry: 0.09, size: 7, color: "#d9c7a2", phase: 0.4 },
-      { period: 44, rx: 0.34, ry: 0.14, size: 11, color: "#e2b15a", phase: 2.1 },
-      { period: 64, rx: 0.46, ry: 0.19, size: 12, color: "#6eb6f0", phase: 4.2 },
-      { period: 88, rx: 0.58, ry: 0.24, size: 9, color: "#e07a4c", phase: 1.2 }
+      { name: "Mercury", period: 28, rx: 0.22, ry: 0.09, size: 7, color: "#d9c7a2", phase: 0.4 },
+      { name: "Venus", period: 44, rx: 0.34, ry: 0.14, size: 11, color: "#e2b15a", phase: 2.1 },
+      { name: "Earth", period: 64, rx: 0.46, ry: 0.19, size: 12, color: "#6eb6f0", phase: 4.2 },
+      { name: "Mars", period: 88, rx: 0.58, ry: 0.24, size: 9, color: "#e07a4c", phase: 1.2 }
     ];
     var start = performance.now();
 
@@ -46,10 +46,19 @@
       ctx.arc(cx, cy, 22, 0, Math.PI * 2);
       ctx.fill();
 
-      planets.forEach(function (planet) {
+      var spots = planets.map(function (planet) {
         var angle = planet.phase + (Math.PI * 2 * t) / planet.period;
-        var x = cx + Math.cos(angle) * w * planet.rx;
-        var y = cy + Math.sin(angle) * h * planet.ry;
+        return {
+          planet: planet,
+          x: cx + Math.cos(angle) * w * planet.rx,
+          y: cy + Math.sin(angle) * h * planet.ry
+        };
+      });
+
+      spots.forEach(function (spot) {
+        var planet = spot.planet;
+        var x = spot.x;
+        var y = spot.y;
         var body = ctx.createRadialGradient(x - planet.size * 0.35, y - planet.size * 0.35, 1, x, y, planet.size);
         body.addColorStop(0, "#ffffff");
         body.addColorStop(0.35, planet.color);
@@ -58,6 +67,23 @@
         ctx.beginPath();
         ctx.arc(x, y, planet.size, 0, Math.PI * 2);
         ctx.fill();
+      });
+
+      ctx.font = "600 28px sans-serif";
+      ctx.textBaseline = "middle";
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = "rgba(5, 8, 16, 0.9)";
+      ctx.fillStyle = "#f4fbff";
+      spots.forEach(function (spot) {
+        var label = spot.planet.name;
+        var width = ctx.measureText(label).width;
+        var x = spot.x + spot.planet.size + 10;
+        var y = spot.y;
+        if (x + width > w - 12) x = spot.x - spot.planet.size - 10 - width;
+        if (y < 18) y = 18;
+        if (y > h - 18) y = h - 18;
+        ctx.strokeText(label, x, y);
+        ctx.fillText(label, x, y);
       });
 
       if (!reduce) requestAnimationFrame(draw);
@@ -89,7 +115,10 @@
     var spawn = 0.4;
     var pointerY = null;
     var keys = {};
+    var pad = { left: false, right: false };
     var last = 0;
+    var leftButton = document.getElementById("game-left");
+    var rightButton = document.getElementById("game-right");
 
     function rememberBest() {
       if (score <= best) return;
@@ -142,6 +171,23 @@
       canvas.focus();
     });
 
+    function holdButton(button, which) {
+      if (!button) return;
+      function down(event) {
+        pad[which] = true;
+        event.preventDefault();
+      }
+      function up() {
+        pad[which] = false;
+      }
+      button.addEventListener("pointerdown", down);
+      button.addEventListener("pointerup", up);
+      button.addEventListener("pointercancel", up);
+      button.addEventListener("pointerleave", up);
+    }
+    holdButton(leftButton, "left");
+    holdButton(rightButton, "right");
+
     function drawRocket() {
       var x = rocket.x;
       var y = rocket.y;
@@ -178,9 +224,9 @@
       var dt = Math.min(0.033, last ? (now - last) / 1000 : 0.016);
       last = now;
       if (alive) {
-        var thrusting = keys.arrowup || keys.w || keys.arrowdown || keys.s;
-        if (keys.arrowup || keys.w) rocket.y -= 240 * dt;
-        if (keys.arrowdown || keys.s) rocket.y += 240 * dt;
+        var thrusting = keys.arrowup || keys.w || keys.arrowdown || keys.s || pad.left || pad.right;
+        if (keys.arrowup || keys.w || pad.left) rocket.y -= 240 * dt;
+        if (keys.arrowdown || keys.s || pad.right) rocket.y += 240 * dt;
         if (!thrusting && pointerY !== null) rocket.y += (pointerY - rocket.y) * Math.min(1, dt * 10);
         rocket.y = Math.max(36, Math.min(H - 36, rocket.y));
         spawn -= dt;
