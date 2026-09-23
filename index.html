@@ -691,9 +691,14 @@
             const rocket = document.getElementById('rocket');
             if (rocket) {
                 function rocketSize() {
+                    const w = rocket.offsetWidth || 48;
+                    const h = rocket.offsetHeight || 100;
+                    const reach = Math.hypot(w, h);
                     return {
-                        w: rocket.offsetWidth || 48,
-                        h: rocket.offsetHeight || 100
+                        w: w,
+                        h: h,
+                        padX: 4 + (reach - w) / 2,
+                        padY: 4 + (reach - h) / 2
                     };
                 }
 
@@ -708,11 +713,10 @@
 
                 function keepClear(x, y) {
                     const size = rocketSize();
-                    const pad = 4;
                     const nav = document.querySelector('.space-navbar');
                     const name = document.querySelector('.header-content h1');
-                    let nextX = Math.max(pad, Math.min(x, window.innerWidth - size.w - pad));
-                    let nextY = Math.max(pad, Math.min(y, window.innerHeight - size.h - pad));
+                    let nextX = Math.max(size.padX, Math.min(x, window.innerWidth - size.w - size.padX));
+                    let nextY = Math.max(size.padY, Math.min(y, window.innerHeight - size.h - size.padY));
                     if (nav) {
                         const box = nav.getBoundingClientRect();
                         if (nextY < box.bottom + 4) nextY = box.bottom + 6;
@@ -722,8 +726,8 @@
                         const hit = nextX + size.w > box.left - 8 && nextX < box.right + 8 && nextY + size.h > box.top - 8 && nextY < box.bottom + 8;
                         if (hit) nextY = box.bottom + 10;
                     }
-                    nextX = Math.max(pad, Math.min(nextX, window.innerWidth - size.w - pad));
-                    nextY = Math.max(pad, Math.min(nextY, window.innerHeight - size.h - pad));
+                    nextX = Math.max(size.padX, Math.min(nextX, window.innerWidth - size.w - size.padX));
+                    nextY = Math.max(size.padY, Math.min(nextY, window.innerHeight - size.h - size.padY));
                     return { x: nextX, y: nextY };
                 }
 
@@ -806,7 +810,7 @@
                     position: fixed;
                     top: 0;
                     left: 0;
-                    width: 100vw;
+                    width: 100%;
                     height: 100vh;
                     z-index: 1;
                     pointer-events: none;
