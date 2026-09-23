@@ -725,9 +725,17 @@
                     return { x: nextX, y: nextY };
                 }
 
-                document.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX - rocketW / 2;
-                    mouseY = e.clientY - 36;
+                function aim(clientX, clientY) {
+                    const size = rocketSize();
+                    mouseX = clientX - size.w / 2;
+                    mouseY = clientY - size.h / 2;
+                }
+
+                document.addEventListener('pointerdown', (event) => {
+                    aim(event.clientX, event.clientY);
+                });
+                document.addEventListener('pointermove', (event) => {
+                    aim(event.clientX, event.clientY);
                 });
 
                 function updateRocket(now) {
