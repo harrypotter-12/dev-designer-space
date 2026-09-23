@@ -5,19 +5,54 @@
     var ctx = canvas.getContext("2d");
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var planets = [
-      { name: "Mercury", period: 28, rx: 0.22, ry: 0.09, size: 7, color: "#d9c7a2", phase: 0.4 },
-      { name: "Venus", period: 44, rx: 0.34, ry: 0.14, size: 11, color: "#e2b15a", phase: 2.1 },
-      { name: "Earth", period: 64, rx: 0.46, ry: 0.19, size: 12, color: "#6eb6f0", phase: 4.2 },
-      { name: "Mars", period: 88, rx: 0.58, ry: 0.24, size: 9, color: "#e07a4c", phase: 1.2 }
+      { period: 28, rx: 0.22, ry: 0.09, size: 7, color: "#d9c7a2", phase: 0.4 },
+      { period: 44, rx: 0.34, ry: 0.14, size: 11, color: "#e2b15a", phase: 2.1 },
+      { period: 64, rx: 0.46, ry: 0.19, size: 12, color: "#6eb6f0", phase: 4.2 },
+      { period: 88, rx: 0.58, ry: 0.24, size: 9, color: "#e07a4c", phase: 1.2 }
     ];
     var start = performance.now();
+    var spin = 0;
+    var lastClientX = null;
+    var dragging = false;
+
+    function crank(clientX) {
+      if (lastClientX == null) {
+        lastClientX = clientX;
+        return;
+      }
+      var rect = canvas.getBoundingClientRect();
+      var dx = clientX - lastClientX;
+      lastClientX = clientX;
+      if (!rect.width) return;
+      spin += (dx / rect.width) * 26;
+    }
+
+    canvas.addEventListener("pointerdown", function (event) {
+      dragging = true;
+      lastClientX = event.clientX;
+      if (canvas.setPointerCapture) canvas.setPointerCapture(event.pointerId);
+    });
+    canvas.addEventListener("pointermove", function (event) {
+      if (dragging || event.pointerType === "mouse") crank(event.clientX);
+      if (reduce) draw(performance.now());
+    });
+    canvas.addEventListener("pointerup", function () {
+      dragging = false;
+    });
+    canvas.addEventListener("pointercancel", function () {
+      dragging = false;
+      lastClientX = null;
+    });
+    canvas.addEventListener("pointerleave", function () {
+      if (!dragging) lastClientX = null;
+    });
 
     function draw(now) {
       var w = canvas.width;
       var h = canvas.height;
       var cx = w / 2;
       var cy = h / 2 + 10;
-      var t = reduce ? 0 : (now - start) / 1000;
+      var t = (reduce ? 0 : (now - start) / 1000) + spin;
       ctx.clearRect(0, 0, w, h);
 
       var glow = ctx.createRadialGradient(cx, cy, 8, cx, cy, 70);
@@ -46,19 +81,10 @@
       ctx.arc(cx, cy, 22, 0, Math.PI * 2);
       ctx.fill();
 
-      var spots = planets.map(function (planet) {
+      planets.forEach(function (planet) {
         var angle = planet.phase + (Math.PI * 2 * t) / planet.period;
-        return {
-          planet: planet,
-          x: cx + Math.cos(angle) * w * planet.rx,
-          y: cy + Math.sin(angle) * h * planet.ry
-        };
-      });
-
-      spots.forEach(function (spot) {
-        var planet = spot.planet;
-        var x = spot.x;
-        var y = spot.y;
+        var x = cx + Math.cos(angle) * w * planet.rx;
+        var y = cy + Math.sin(angle) * h * planet.ry;
         var body = ctx.createRadialGradient(x - planet.size * 0.35, y - planet.size * 0.35, 1, x, y, planet.size);
         body.addColorStop(0, "#ffffff");
         body.addColorStop(0.35, planet.color);
@@ -67,23 +93,6 @@
         ctx.beginPath();
         ctx.arc(x, y, planet.size, 0, Math.PI * 2);
         ctx.fill();
-      });
-
-      ctx.font = "600 28px sans-serif";
-      ctx.textBaseline = "middle";
-      ctx.lineWidth = 5;
-      ctx.strokeStyle = "rgba(5, 8, 16, 0.9)";
-      ctx.fillStyle = "#f4fbff";
-      spots.forEach(function (spot) {
-        var label = spot.planet.name;
-        var width = ctx.measureText(label).width;
-        var x = spot.x + spot.planet.size + 10;
-        var y = spot.y;
-        if (x + width > w - 12) x = spot.x - spot.planet.size - 10 - width;
-        if (y < 18) y = 18;
-        if (y > h - 18) y = h - 18;
-        ctx.strokeText(label, x, y);
-        ctx.fillText(label, x, y);
       });
 
       if (!reduce) requestAnimationFrame(draw);
@@ -111,6 +120,7 @@
     var rocket = { x: 120, y: H / 2 };
     var rocks = [];
     var score = 0;
+    var lived = 0;
     var alive = true;
     var spawn = 0.4;
     var pointerY = null;
@@ -136,10 +146,15 @@
       if (bestEl) bestEl.textContent = "Best " + best;
     }
 
+    function rushNow() {
+      return 1 + Math.min(2.4, lived / 16);
+    }
+
     function reset() {
       rocket.y = H / 2;
       rocks = [];
       score = 0;
+      lived = 0;
       alive = true;
       spawn = 0.4;
       paintScore();
@@ -224,6 +239,8 @@
       var dt = Math.min(0.033, last ? (now - last) / 1000 : 0.016);
       last = now;
       if (alive) {
+        lived += dt;
+        var rush = rushNow();
         var thrusting = keys.arrowup || keys.w || keys.arrowdown || keys.s || pad.left || pad.right;
         if (keys.arrowup || keys.w || pad.left) rocket.y -= 240 * dt;
         if (keys.arrowdown || keys.s || pad.right) rocket.y += 240 * dt;
@@ -235,12 +252,12 @@
             x: W + 24,
             y: 36 + Math.random() * (H - 72),
             r: 16 + Math.random() * 18,
-            speed: 150 + Math.random() * 110
+            speed: 160 + Math.random() * 90
           });
-          spawn = 0.75 + Math.random() * 0.45;
+          spawn = Math.max(0.28, (0.78 + Math.random() * 0.4) / rush);
         }
         for (var i = rocks.length - 1; i >= 0; i--) {
-          rocks[i].x -= rocks[i].speed * dt;
+          rocks[i].x -= rocks[i].speed * rush * dt;
           if (rocks[i].x < -40) {
             rocks.splice(i, 1);
             score += 1;

@@ -938,6 +938,15 @@ html[data-sound="off"] .sound-label::after {
   border-radius: 16px;
 }
 
+.solar-section canvas {
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+.solar-section canvas:active {
+  cursor: grabbing;
+}
+
 .rocket-game-section canvas {
   cursor: crosshair;
 }
