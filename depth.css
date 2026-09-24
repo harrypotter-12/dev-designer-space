@@ -291,6 +291,10 @@
   display: block;
 }
 
+#projects-container .project-image img.app-shot {
+  object-position: top center;
+}
+
 #projects-container .project-content {
   display: flex;
   flex-direction: column;
