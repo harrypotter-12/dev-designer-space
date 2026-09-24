@@ -256,9 +256,9 @@
 #projects-container.space-grid {
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 48px;
+  gap: 72px 56px;
   align-items: stretch;
-  margin-top: 12px;
+  margin-top: 20px;
   margin-bottom: 24px;
 }
 
@@ -279,20 +279,34 @@
   pointer-events: none !important;
 }
 
-#projects-container .project-image {
-  height: 180px;
+#projects-container .mission-details {
+  padding: 32px 32px 28px !important;
+}
+
+#projects-container .card-mark {
+  width: 28px;
+  height: 28px;
+  margin: 0 0 18px;
+  border: 1px solid rgba(154, 246, 255, 0.85);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 7px rgba(6, 12, 24, 0.95);
   flex: 0 0 auto;
 }
 
-#projects-container .project-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+#projects-container .mission-status {
+  display: none;
 }
 
-#projects-container .project-image img.app-shot {
-  object-position: top center;
+#projects-container .project-title {
+  font-size: 1.45rem !important;
+  line-height: 1.25 !important;
+  margin: 0 0 10px !important;
+}
+
+#projects-container .project-description {
+  margin-bottom: 0.85rem;
+  font-size: 1.08rem !important;
+  line-height: 1.7 !important;
 }
 
 #projects-container .project-content {
@@ -302,10 +316,6 @@
   gap: 0.35rem;
   position: relative;
   z-index: 2;
-}
-
-#projects-container .project-description {
-  margin-bottom: 0.6rem;
 }
 
 #projects-container .project-links {
@@ -564,7 +574,7 @@ button.space-menu-toggle {
 
   #projects-container.space-grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 56px;
     width: 100%;
     max-width: 100%;
     padding: 0 16px;
