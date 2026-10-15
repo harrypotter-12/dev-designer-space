@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Drawing book — Jashan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="navigation.css">
+    <link rel="stylesheet" type="text/css" href="depth.css">
+    <link rel="stylesheet" type="text/css" href="book.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap">
+    <link rel="icon" type="x-icon" href="images/favicon.ico">
+    <script>
+        (function () {
+            var stored = null;
+            try { stored = localStorage.getItem("portfolio-sound"); } catch (error) { stored = null; }
+            var on = stored === "on";
+            document.documentElement.setAttribute("data-sound", on ? "on" : "off");
+        })();
+    </script>
+</head>
+<body>
+    <canvas id="starfield" width="1" height="1" aria-hidden="true"></canvas>
+    <nav class="space-navbar">
+        <div class="nav-brand-container">
+            <a href="index.html#body-header" class="space-brand">
+                <div class="brand-orb"></div>
+                <span class="brand-text">JASHAN</span>
+                <div class="brand-status">ONLINE</div>
+            </a>
+        </div>
+        <ul class="space-nav-links" id="space-nav">
+            <li class="nav-item">
+                <a href="index.html#about" class="nav-link">
+                    <span class="link-text">ABOUT</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html#portfolio" class="nav-link">
+                    <span class="link-text">PORTFOLIO</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html#courses" class="nav-link">
+                    <span class="link-text">EDUCATION</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="index.html#contact" class="nav-link">
+                    <span class="link-text">CONTACT</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="book.html" class="nav-link" aria-current="page">
+                    <span class="link-text">Book</span>
+                </a>
+            </li>
+        </ul>
+        <button type="button" id="sound-toggle" class="sound-toggle is-muted" aria-pressed="false" aria-label="Turn sound on">
+            <span class="sound-icon" aria-hidden="true">🔇</span>
+            <span class="sound-label">Muted</span>
+        </button>
+        <button type="button" class="space-menu-toggle" aria-expanded="false" aria-controls="space-nav" aria-label="Open menu">
+            <div class="toggle-container">
+                <span class="toggle-line"></span>
+                <span class="toggle-line"></span>
+                <span class="toggle-line"></span>
+            </div>
+        </button>
+    </nav>
+    <main class="book-main">
+        <h1>JASHAN</h1>
+        <p class="book-kicker">The drawings go here.</p>
+        <div class="book-stage">
+            <div class="book-open is-closed" id="book">
+                <div class="left-page" id="left-page"></div>
+                <div class="right-page">
+                    <div class="sheet" id="book-under"></div>
+                    <div class="leaf" id="book-leaf">
+                        <div class="face front"></div>
+                        <div class="face back"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="book-controls">
+            <button type="button" id="book-prev">Previous</button>
+            <p id="book-count">Cover</p>
+            <button type="button" id="book-next">Next</button>
+        </div>
+    </main>
+    <script src="site-sounds.js"></script>
+    <script src="starfield.js"></script>
+    <script src="book.js"></script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+/* Drawing book. Blank pages until image files are listed in images/book/pages.json. */
+
+html, body {
+  margin: 0;
+  max-width: 100%;
+  overflow-x: clip;
+  background: #000;
+  color: #e7f4ff;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+#starfield {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  z-index: 1;
+  pointer-events: none;
+  display: block;
+}
+
+.book-main {
+  position: relative;
+  z-index: 30;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 10.5rem 16px 4rem;
+  overflow-x: clip;
+}
+
+.book-main h1 {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(2rem, 8vw, 3.4rem);
+  letter-spacing: 0.08em;
+  color: #9af6ff;
+  font-weight: 700;
+}
+
+.book-kicker {
+  margin: 10px auto 0;
+  max-width: 36rem;
+  text-align: center;
+  color: #c5d7e6;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.book-stage {
+  width: 100%;
+  max-width: 920px;
+  margin: 28px auto 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.book-open {
+  display: flex;
+  width: min(880px, 100%);
+  margin-left: auto;
+  min-height: 280px;
+  aspect-ratio: 8 / 5;
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, 0.35));
+}
+
+.book-open.is-closed {
+  width: min(420px, 100%);
+  margin: 0 auto;
+  aspect-ratio: 3 / 4;
+}
+
+.book-open.is-closed .left-page {
+  display: none;
+}
+
+.book-open.is-closed .right-page {
+  width: 100%;
+}
+
+.left-page,
+.right-page {
+  position: relative;
+  width: 50%;
+  min-width: 0;
+  background: #f6f1e7;
+  color: #3c3732;
+}
+
+.left-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: 12px 0 0 12px;
+  box-shadow: inset -14px 0 18px rgba(40, 32, 24, 0.08);
+}
+
+.right-page {
+  border-radius: 0 12px 12px 0;
+  perspective: 1600px;
+  box-shadow: inset 14px 0 18px rgba(40, 32, 24, 0.08);
+}
+
+.book-open.is-closed .right-page {
+  border-radius: 12px;
+}
+
+.sheet,
+.leaf,
+.face {
+  position: absolute;
+  inset: 0;
+}
+
+.leaf {
+  transform-origin: left center;
+  transform-style: preserve-3d;
+}
+
+.face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+  background: #f6f1e7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.leaf .back {
+  transform: rotateY(180deg);
+}
+
+.sheet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(40, 32, 24, 0.08), rgba(40, 32, 24, 0) 22px),
+    #f6f1e7;
+}
+
+.face {
+  background:
+    linear-gradient(90deg, rgba(40, 32, 24, 0.08), rgba(40, 32, 24, 0) 22px),
+    #f6f1e7;
+}
+
+.is-cover {
+  background: #243044;
+  color: #f4efe6;
+}
+
+.page-title,
+.page-copy {
+  font-family: Georgia, "Palatino Linotype", Palatino, serif;
+  font-weight: normal;
+  margin: 0;
+  padding: 0 18px;
+}
+
+.page-title {
+  font-size: 1.7rem;
+  margin-bottom: 12px;
+}
+
+.page-copy {
+  font-size: 1.15rem;
+  line-height: 1.45;
+  max-width: 16rem;
+}
+
+.is-cover .page-title,
+.is-cover .page-copy {
+  color: #f4efe6;
+}
+
+.face img,
+.sheet img,
+.left-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #f6f1e7;
+  display: block;
+}
+
+.page-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+}
+
+.book-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 100%;
+  margin: 18px auto 0;
+  box-sizing: border-box;
+}
+
+.book-controls button {
+  min-width: 96px;
+  min-height: 44px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(154, 246, 255, 0.7);
+  background: transparent;
+  color: #e7f4ff;
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.book-controls button:disabled {
+  opacity: 0.45;
+}
+
+.book-controls p {
+  margin: 0;
+  min-width: 7rem;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .book-main {
+    padding-top: 11.5rem;
+  }
+
+  .page-title {
+    font-size: 1.2rem;
+  }
+
+  .page-copy {
+    font-size: 0.95rem;
+    padding: 0 12px;
+  }
+
+  .book-open {
+    aspect-ratio: 5 / 4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leaf {
+    transition: none !important;
+  }
+}

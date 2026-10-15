@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="timeline-override.css">
     <link rel="stylesheet" type="text/css" href="rocket-design.css">
     <link rel="stylesheet" type="text/css" href="depth.css">
+    <link rel="stylesheet" type="text/css" href="game-3d.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap">
@@ -166,6 +167,11 @@
                 <li class="nav-item">
                     <a href="#contact" class="nav-link">
                         <span class="link-text">CONTACT</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="book.html" class="nav-link">
+                        <span class="link-text">Book</span>
                     </a>
                 </li>
             </ul>
@@ -397,6 +403,22 @@
                 <button type="button" id="game-restart">Restart</button>
             </div>
             <canvas id="game-canvas" width="800" height="420" tabindex="0" aria-label="Fly the rocket and dodge rocks"></canvas>
+        </section>
+
+        <section id="rocket-game-3d" class="space-section rocket-3d-section">
+            <h2 class="section-heading">Fly the Rocket in 3D</h2>
+            <p class="game-lead">Fly through the stars and dodge the rocks. Left and Right steer. It speeds up the longer you last.</p>
+            <div class="game3d-bar">
+                <button type="button" id="game3d-left">Left</button>
+                <button type="button" id="game3d-right">Right</button>
+                <p id="game3d-score">Score 0</p>
+                <p id="game3d-best">Best 0</p>
+                <button type="button" id="game3d-restart">Restart</button>
+            </div>
+            <div class="game3d-frame">
+                <canvas id="game3d-canvas" width="800" height="420" tabindex="0" aria-label="Fly the rocket through stars and dodge rocks"></canvas>
+                <p id="game3d-status" class="game3d-status" hidden>Hit. Press Restart to play again.</p>
+            </div>
         </section>
 
         <!-- ----------------------------Courses and Software Section----------------------------------------------------- -->
@@ -1101,6 +1123,7 @@
     <script src="card-tilt.js"></script>
     <script src="site-sounds.js"></script>
     <script src="space-extras.js"></script>
+    <script src="game-3d.js"></script>
     <script src="starfield.js"></script>
     
     <!-- Load Particle Systems -->
